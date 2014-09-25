@@ -182,66 +182,63 @@ public class SalesforceGlueAccountPage  extends PageObject {
 		    		     firstname().type(record.get("firstName"));
 			    	}
 			    	
-				    	if (str.equals("Direct Advertiser") || str.equals("Charity") || str.equals("Brand")|| str.equals("Client") || str.equals("DMGT Group")) 
-				    	{
-				    		waitABit(1000);
-							saveButton.click();
-							String Name = readAccountName().getText();
-					    	arraylist.add(Name);
-					    	waitABit(5000);
-					    	
-/**************************************************************************/ 
-				    		
-					    	if (str.equals("Client") || str.equals("DMGT Group")) {
-					    		
-					    		String readClientAccountName = readAccountName().getText();
-					    		String clientURL = getDriver().getCurrentUrl();
-					    		System.out.println("Client URL is --->"+clientURL);
-					    		accountCreation();
-					    		selectAccountType().selectByVisibleText("Agency"); //Create Billing a/c
-					    		continueButt().click();
-								waitABit(3000);
-								accountName().type(record.get("lastName") + s);
-					    		phoneNumber().type(record.get("phone"));
-						    	billingStreet().type(record.get("billingStreet"));
-						    	billingPostCode().type(record.get("postalCode"));
-						    	waitABit(1000);
+					    	if (str.equals("Direct Advertiser") || str.equals("Charity") || str.equals("Brand")|| str.equals("Client") || str.equals("DMGT Group")) 
+					    	{
+					    		waitABit(1000);
 								saveButton.click();
-								waitABit(5000);
-								newRelationship.click(); 
-								waitABit(3000);
-								accountB_Name().type(readClientAccountName);
-						    	billing().selectByVisibleText("Billing");
-						    	saveRelationship.click();
-						    	waitABit(6000);	
-						    	getDriver().get(clientURL); // come back to client a/c page
-						    	waitABit(6000);	
+								String Name = readAccountName().getText();
+						    	arraylist.add(Name);
+						    	waitABit(5000);
+	/**************************************************************************/ 
+								    	if (str.equals("Client") || str.equals("DMGT Group")) {
+								    		
+								    		String readClientAccountName = readAccountName().getText();
+								    		String clientURL = getDriver().getCurrentUrl();
+								    		System.out.println("Client URL is --->"+clientURL);
+								    		accountCreation();
+								    		selectAccountType().selectByVisibleText("Agency"); //Create Billing a/c
+								    		continueButt().click();
+											waitABit(3000);
+											accountName().type(record.get("lastName") + s);
+								    		phoneNumber().type(record.get("phone"));
+									    	billingStreet().type(record.get("billingStreet"));
+									    	billingPostCode().type(record.get("postalCode"));
+									    	waitABit(1000);
+											saveButton.click();
+											waitABit(5000);
+											newRelationship.click(); 
+											waitABit(3000);
+											accountB_Name().type(readClientAccountName);
+									    	billing().selectByVisibleText("Billing");
+									    	saveRelationship.click();
+									    	waitABit(6000);	
+									    	getDriver().get(clientURL); // come back to client a/c page
+									    	waitABit(6000);	
+								    	}
+	/************** Select Industry Category **********************************/ 
+						    	
+						    	getDriver().switchTo().frame("066D0000000kh27");
+						    	WebElement editable = getDriver().switchTo().activeElement();
+						    	editable.findElement(By.cssSelector("input[name='j_id0:j_id1:j_id27:j_id28:j_id31']")).click();
+						    	waitFor(4).seconds();
+					    	   	mainCate().selectByVisibleText(record.get("mainCategory"));
+					    	   	waitFor(4).seconds();
+						 	    subCate().selectByVisibleText(record.get("subCategory"));
+						 	    waitFor(4).seconds();
+						 	    minorCate().selectByVisibleText(record.get("minorCategory"));
+						 	    waitFor(5).seconds();
+						 	    saveIndCate().sendKeys(Keys.RETURN);
+						 	    waitFor(4).seconds();
+							    getDriver().switchTo().defaultContent();
 					    	}
-					    	
-/************** Select Industry Category **********************************/ 
-					    	
-					    	getDriver().switchTo().frame("066D0000000kh27");
-					    	WebElement editable = getDriver().switchTo().activeElement();
-					    	editable.findElement(By.cssSelector("input[name='j_id0:j_id1:j_id27:j_id28:j_id31']")).click();
-					    	waitFor(4).seconds();
-				    	   	mainCate().selectByVisibleText(record.get("mainCategory"));
-				    	   	waitFor(4).seconds();
-					 	    subCate().selectByVisibleText(record.get("subCategory"));
-					 	    waitFor(4).seconds();
-					 	    minorCate().selectByVisibleText(record.get("minorCategory"));
-					 	    waitFor(5).seconds();
-					 	    saveIndCate().sendKeys(Keys.RETURN);
-					 	    waitFor(4).seconds();
-						    getDriver().switchTo().defaultContent();
-				    	}
-				    	
 /************** Select Industry Category **********************************/ 						    
-				    		
 				    	else {
+				    		
 				    	saveButton.click();
 				    	String Name = readAccountName().getText();
 				    	arraylist.add(Name);
 				    	waitABit(5000);
+				    	
 				    	}
 
 /**************  CCI Integration  *******************************************/  				    	
@@ -253,26 +250,23 @@ public class SalesforceGlueAccountPage  extends PageObject {
 						waitFor(12).seconds();
 						getDriver().switchTo().alert().accept(); 
 						waitFor(8).seconds();
-						if (str.equals("Client") || str.equals("DMGT Group")) {
-				    		
-							createDirectOrder().click();
-				    	}
 						
-						else { 
-								accountMapping();  /**************  Account Mapping  *******************************************/
-								waitFor(8).seconds();
-							
-								while(SOPID().getText().equals(null)) {
-									waitFor(2).seconds();
-									getDriver().navigate().back();
-									waitFor(5).seconds();
-									accountMapping();
-								}
-								System.out.println("SOPID is----------------------------------------->"+SOPID().getText());
-								getDriver().navigate().back();
-								waitFor(5).seconds();
-						    	createDirectOrder().click();
-						}
+									if (str.equals("Direct Advertiser") || str.equals("Charity") || str.equals("Brand")|| str.equals("Private Advertiser")){
+												
+												waitFor(8).seconds();
+												accountMapping();  /**************  Account Mapping  *******************************************/
+												waitFor(5).seconds();
+													while(SOPID().getText().equals(null)) {
+														waitFor(2).seconds();
+														getDriver().navigate().back();
+														waitFor(5).seconds();
+														accountMapping();
+													}
+													System.out.println("SOPID is----------------------------------------->"+SOPID().getText());
+													getDriver().navigate().back();
+									}
+						waitFor(5).seconds();
+					   	createDirectOrder().click();
 				    	
 /**************  Select Order Type ******************************************/
 				    	
