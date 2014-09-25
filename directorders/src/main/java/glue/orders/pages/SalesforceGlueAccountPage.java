@@ -80,6 +80,12 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	private WebElement accountMapping;
 	private WebElementFacade customerRef()        { return element(By.xpath("//*[@id='00ND0000005WVcQ_ileinner']"));		}
 
+	@FindBy(how = How.PARTIAL_LINK_TEXT, using = "-Mail Advertising")
+	private WebElement financeAccount;
+	private WebElementFacade FinanceAccNum()     { return element(By.xpath(".//*[@id='ep']/div[2]/div[2]/table/tbody/tr[3]/td[2]"));}
+	private WebElementFacade CCIMailCustomerID() { return element(By.xpath(".//*[@id='ep']/div[2]/div[2]/table/tbody/tr[5]/td[4]"));}
+	private WebElementFacade SOPID() 			 { return element(By.xpath(".//*[@id='ep']/div[2]/div[2]/table/tbody/tr[9]/td[2]"));}
+	
 	@FindBy(how = How.XPATH, using = "//input[@title='New Relationship']")
 	private WebElement newRelationship;
 	
@@ -91,6 +97,8 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	private WebElementFacade billingRef()        { return element(By.xpath("//*[@id='j_id0:j_id1:i:f:pb:d:Billing_AgenciesList.input']/option[1]")); }
 	private WebElementFacade selectBillingRef()  { return element(By.xpath("//*[@id='j_id0:j_id1:i:f:pb:d:Account4Contact.input']/option[1]"));		 }
 	private WebElementFacade syncNext() 		{ return element(By.id("j_id0:j_id1:i:f:pb:pbb:bottom:next"));				}
+	
+	
 	
 	public void type(String mytype) {
     	Select droplist = new Select(find(By.id("acc6")));   
@@ -112,6 +120,17 @@ public class SalesforceGlueAccountPage  extends PageObject {
     public void newAccountButtonFromSearchResultsSection() {
     	waitABit(4000);
     	newAccountButtonChild().click();
+    }
+    
+    public void accountMapping(){
+    	
+    	accountMapping.click();
+    	waitFor(3).seconds();
+    	String ref = customerRef().getText();
+    	waitFor(3).seconds();
+    	getDriver().navigate().back();
+    	waitFor(8).seconds();
+    	financeAccount.click();
     }
     
     public void accountCreation(){
@@ -227,26 +246,34 @@ public class SalesforceGlueAccountPage  extends PageObject {
 
 /**************  CCI Integration  *******************************************/  				    	
 				    	
+				    	
 				    	CCICustomerMail().click();
 				    	waitFor(8).seconds();
 						getDriver().switchTo().alert().accept();  
 						waitFor(12).seconds();
 						getDriver().switchTo().alert().accept(); 
-						
-/**************  Account Mapping  *******************************************/
-						
 						waitFor(8).seconds();
-				    	accountMapping.click();
-				    	waitFor(3).seconds();
-				    	String ref = customerRef().getText();
-				    	waitFor(3).seconds();
-				    	getDriver().navigate().back();
-				    	
-/**************  Click on Direct Order  **************************************/ 
-				    	
-				    	waitFor(1).minute();
-				    	createDirectOrder().click();
+						if (str.equals("Client") || str.equals("DMGT Group")) {
+				    		
+							createDirectOrder().click();
+				    	}
 						
+						else { 
+								accountMapping();  /**************  Account Mapping  *******************************************/
+								waitFor(8).seconds();
+							
+								while(SOPID().getText().equals(null)) {
+									waitFor(2).seconds();
+									getDriver().navigate().back();
+									waitFor(5).seconds();
+									accountMapping();
+								}
+								System.out.println("SOPID is----------------------------------------->"+SOPID().getText());
+								getDriver().navigate().back();
+								waitFor(5).seconds();
+						    	createDirectOrder().click();
+						}
+				    	
 /**************  Select Order Type ******************************************/
 				    	
 				if (str.equals("Direct Advertiser") || str.equals("Charity") || str.equals("Client") || str.equals("DMGT Group")) 
@@ -309,7 +336,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 						
 /************** Launch OrderPlugin and Create Order******************************************/
 						
-						 waitFor(15).seconds();
+						 waitFor(20).seconds();
 				    	 getDriver().switchTo().frame(getDriver().findElement(By.tagName("iframe")));
 				     	 WebElement element = getDriver().switchTo().activeElement();
 				     	 waitFor(2).seconds();
@@ -384,8 +411,8 @@ public class SalesforceGlueAccountPage  extends PageObject {
 /**************************************************************************/						
 				    	 						waitFor(15).seconds();
 				    	 				    	if (readAccountName().isVisible()) {
-				    	 				    		System.out
-													.println("Iteration " +j + " is successful : " + " Customer reference is ------------------> "+ref);
+				    	 				    		/*System.out
+													.println("Iteration " +j + " is successful : " + " Customer reference is ------------------> "+ref);*/
 				    	 				    		accountCreation();
 				    	 				    		j++;
 				    	 					    	
