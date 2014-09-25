@@ -7,6 +7,7 @@ public class AcceptanceTestSuite extends ThucydidesJUnitStories {
 	
 	public AcceptanceTestSuite() {
 		
+		
 		WebDriverConfigurer.configureDrivers();
 		
 		}
