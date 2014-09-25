@@ -371,13 +371,13 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	 
 /**************************************************************************/
 				    	 
-				    	 WebDriverWait wait = new WebDriverWait(getDriver(), 3);
+				    	 /*WebDriverWait wait = new WebDriverWait(getDriver(), 3);
 				    	 if(wait.until(ExpectedConditions.alertIsPresent())!=null)
 				    	      getDriver().switchTo().alert().accept();
 				    	 else {
 				    	       System.out.println("alert was not present");
 				    	       
-				    	 }
+				    	 }*/
 				    	 getDriver().switchTo().defaultContent();
 				    	 
 				    	 
