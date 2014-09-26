@@ -101,10 +101,13 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	private WebElementFacade billingRef()        { return element(By.xpath("//*[@id='j_id0:j_id1:i:f:pb:d:Billing_AgenciesList.input']/option[1]")); }
 	private WebElementFacade selectBillingRef()  { return element(By.xpath("//*[@id='j_id0:j_id1:i:f:pb:d:Account4Contact.input']/option[1]"));		 }
 	private WebElementFacade syncNext() 		 { return element(By.id("j_id0:j_id1:i:f:pb:pbb:bottom:next"));				                         }
-	private WebElementFacade SearchSOPID() 		 { return element(By.cssSelector("#phSearchInput"));				                         		 }
+//	private WebElementFacade SearchSOPID() 		 { return element(By.xpath(".//*[@id='phSearchInput']"));				                         	 }
+	private WebElementFacade searchGlue() 		 { return element(By.xpath(".//*[@id='phSearchButton']"));				                         	 }
+	private WebElementFacade searchText() 		 { return element(By.id("secondSearchText"));				                         	 			 }
+	private WebElementFacade secondSearch() 		 { return element(By.xpath(".//*[@id='secondSearchButton']"));				                  	 }
 	private WebElementFacade orderlink() 		 { return element(By.xpath("//*[@id='Order_body']/table/tbody/tr[2]/th/a"));						 }
 	private WebElementFacade orderID() 			 { return element(By.xpath("//*[@id='ep']/div[2]/div[2]/table/tbody/tr[10]/td[2]"));                 }
-	
+
 	public void type(String mytype) {
     	Select droplist = new Select(find(By.id("acc6")));   
     	droplist.selectByVisibleText(mytype);
@@ -269,7 +272,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 														waitFor(5).seconds();
 														accountMapping();
 													}
-													System.out.println("**************** Customer Account Name : "+arraylist.get(i) + " Account ID : " +CCIMailCustomerID().getText() + "   SOPID : " +SOPID().getText() + "****************");
+													System.out.println("          **************** Customer Account Name : "+arraylist.get(i) + " +  Account ID : " +CCIMailCustomerID().getText() + " +   SOPID : " +SOPID().getText() + "  ****************");
 													getDriver().navigate().back();
 									}
 									
@@ -406,19 +409,9 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	       
 				    	 }*/
 				    	 getDriver().switchTo().defaultContent();
-				    	 
-				    	 
 /**************************************************************************/						
 				    	 						waitFor(15).seconds();
 				    	 				    	if (readAccountName().isVisible()) {
-				    	 				    		String financeID = SOPID().getText();
-				    	 				    		waitFor(30).seconds();
-				    	 				    		SearchSOPID().type(financeID);
-				    	 				    		if (orderlink().isVisible())
-				    	 				    		{ 
-				    	 				    			clickOn(orderlink());
-				    	 				    			System.out.println("**************** Customer Order ID is :                                                  " + orderID().getText() + "****************");
-				    	 				    		}
 				    	 				    		accountCreation();
 				    	 				    		j++;
 				    	 					    	
