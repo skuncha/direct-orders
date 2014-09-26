@@ -196,7 +196,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 								    		
 								    		String readClientAccountName = readAccountName().getText();
 								    		String clientURL = getDriver().getCurrentUrl();
-								    		System.out.println("Client URL is --->"+clientURL);
+//								    		System.out.println("Client URL is --->"+clientURL); 
 								    		accountCreation();
 								    		selectAccountType().selectByVisibleText("Agency"); //Create Billing a/c
 								    		continueButt().click();
@@ -268,7 +268,8 @@ public class SalesforceGlueAccountPage  extends PageObject {
 														waitFor(5).seconds();
 														accountMapping();
 													}
-													System.out.println("SOPID is----------------------------------------->"+SOPID().getText());
+													System.out.println("Customer CCIMailCustomerID is : --------------------->" +CCIMailCustomerID().getText());
+													System.out.println("Customer Finance SOPID is     : --------------------->"+SOPID().getText());
 													getDriver().navigate().back();
 									}
 									
@@ -299,17 +300,15 @@ public class SalesforceGlueAccountPage  extends PageObject {
 						 	billingSelectionNext().click();  
 				    	}
 		    	}	
-				
 				if (str.equals("Brand")){
 					waitFor(3).seconds();
 		    		billingOption().selectByVisibleText("Direct");
 		    		billingSelectionNext().click(); 
-		    		waitFor(1).minute();
 		    	}
 					 	
 /**************  Create Contact ********************************************/
 					 	
-					 	waitFor(2).seconds();
+					 	waitFor(4).seconds();
 						conSalutation().selectByVisibleText(record.get("salutation"));
 		    		    conFirstName().type(record.get("firstName"));
 		    		    conLastName().type(s + record.get("lastName"));
@@ -320,17 +319,17 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	
 					   	if (str.equals("Client") || str.equals("DMGT Group")) 
 					   	{
-					   		
 				    		selectBillingRef().click();
 				    		waitFor(1).seconds();
 				    	}
-					   	else 
-					   	{
-					    	String endUseraccount = arraylist.get(i);
-					    	i++;
-							accountType().selectByVisibleText(endUseraccount);
-							waitFor(1).seconds();
-					   	}
+						   	else 
+						   	{
+						    	System.out.println("Customer Account Name is : -----------------> "+arraylist.get(i));
+						   		String endUseraccount = arraylist.get(i);
+								accountType().selectByVisibleText(endUseraccount);
+								waitFor(1).seconds();
+								i++;
+						   	}
 						contactNext().click();
 						waitFor(1).seconds();
 						finish().click();
@@ -399,7 +398,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	 
 /**************************************************************************/
 				    	 
-				    	/* WebDriverWait wait1 = new WebDriverWait(getDriver(), 3);
+				  /*  	 WebDriverWait wait1 = new WebDriverWait(getDriver(), 3);
 				    	 if(wait1.until(ExpectedConditions.alertIsPresent())!=null)
 				    	      getDriver().switchTo().alert().accept();
 				    	 else {
