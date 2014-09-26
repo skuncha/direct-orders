@@ -82,6 +82,10 @@ public class SalesforceGlueAccountPage  extends PageObject {
 
 	@FindBy(how = How.PARTIAL_LINK_TEXT, using = "-Mail Advertising")
 	private WebElement financeAccount;
+	
+	@FindBy(how = How.PARTIAL_LINK_TEXT, using = "W8 5TT")
+	private WebElement privateAdvFinanceAccount;
+	
 	private WebElementFacade FinanceAccNum()     { return element(By.xpath(".//*[@id='ep']/div[2]/div[2]/table/tbody/tr[3]/td[2]"));}
 	private WebElementFacade CCIMailCustomerID() { return element(By.xpath(".//*[@id='ep']/div[2]/div[2]/table/tbody/tr[5]/td[4]"));}
 	private WebElementFacade SOPID() 			 { return element(By.xpath(".//*[@id='ep']/div[2]/div[2]/table/tbody/tr[9]/td[2]"));}
@@ -130,7 +134,6 @@ public class SalesforceGlueAccountPage  extends PageObject {
     	waitFor(3).seconds();
     	getDriver().navigate().back();
     	waitFor(8).seconds();
-    	financeAccount.click();
     }
     
     public void accountCreation(){
@@ -247,7 +250,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	CCICustomerMail().click();
 				    	waitFor(8).seconds();
 						getDriver().switchTo().alert().accept();  
-						waitFor(12).seconds();
+						waitFor(15).seconds();
 						getDriver().switchTo().alert().accept(); 
 						waitFor(8).seconds();
 						
@@ -255,6 +258,10 @@ public class SalesforceGlueAccountPage  extends PageObject {
 												
 												waitFor(8).seconds();
 												accountMapping();  /**************  Account Mapping  *******************************************/
+												
+												if (str.equals("Private Advertiser")){
+													privateAdvFinanceAccount.click();   /***** DEPENDENDT ON POSTCODE SUPPLIED*************/
+												} else { financeAccount.click(); }					
 												waitFor(5).seconds();
 													while(SOPID().getText().equals(null)) {
 														waitFor(2).seconds();
@@ -265,9 +272,10 @@ public class SalesforceGlueAccountPage  extends PageObject {
 													System.out.println("SOPID is----------------------------------------->"+SOPID().getText());
 													getDriver().navigate().back();
 									}
+									
 						waitFor(5).seconds();
-					   	createDirectOrder().click();
-				    	
+						createDirectOrder().click();
+								
 /**************  Select Order Type ******************************************/
 				    	
 				if (str.equals("Direct Advertiser") || str.equals("Charity") || str.equals("Client") || str.equals("DMGT Group")) 
@@ -359,7 +367,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	 droplist.selectByVisibleText(record.get("zones"));
 				    	 waitFor(5).seconds();
 				    	 element.findElement(By.xpath("//tbody/tr[6]/td[3]")).click(); // date field
-				    	 waitFor(4).seconds();
+				    	 waitFor(5).seconds();
 				    	 element.findElement(By.xpath("//nav[button='Save']/button[2]")).click();
 /*				    	 String orid = (String) element.findElement(By.xpath("//*[@id='salesforce-plugin']/article/aside[1]/div/div/pre")).getText();
 				    	 System.out.println("Order id is   --->"+orid);*/
@@ -392,13 +400,13 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	 
 /**************************************************************************/
 				    	 
-				    	 /*WebDriverWait wait = new WebDriverWait(getDriver(), 3);
-				    	 if(wait.until(ExpectedConditions.alertIsPresent())!=null)
+				    	 WebDriverWait wait1 = new WebDriverWait(getDriver(), 3);
+				    	 if(wait1.until(ExpectedConditions.alertIsPresent())!=null)
 				    	      getDriver().switchTo().alert().accept();
 				    	 else {
 				    	       System.out.println("alert was not present");
 				    	       
-				    	 }*/
+				    	 }
 				    	 getDriver().switchTo().defaultContent();
 				    	 
 				    	 
