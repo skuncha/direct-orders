@@ -100,9 +100,10 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	
 	private WebElementFacade billingRef()        { return element(By.xpath("//*[@id='j_id0:j_id1:i:f:pb:d:Billing_AgenciesList.input']/option[1]")); }
 	private WebElementFacade selectBillingRef()  { return element(By.xpath("//*[@id='j_id0:j_id1:i:f:pb:d:Account4Contact.input']/option[1]"));		 }
-	private WebElementFacade syncNext() 		{ return element(By.id("j_id0:j_id1:i:f:pb:pbb:bottom:next"));				}
-	
-	
+	private WebElementFacade syncNext() 		 { return element(By.id("j_id0:j_id1:i:f:pb:pbb:bottom:next"));				                         }
+	private WebElementFacade SearchSOPID() 		 { return element(By.cssSelector("#phSearchInput"));				                         		 }
+	private WebElementFacade orderlink() 		 { return element(By.xpath("//*[@id='Order_body']/table/tbody/tr[2]/th/a"));						 }
+	private WebElementFacade orderID() 			 { return element(By.xpath("//*[@id='ep']/div[2]/div[2]/table/tbody/tr[10]/td[2]"));                 }
 	
 	public void type(String mytype) {
     	Select droplist = new Select(find(By.id("acc6")));   
@@ -268,8 +269,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 														waitFor(5).seconds();
 														accountMapping();
 													}
-													System.out.println("Customer CCIMailCustomerID is : --------------------->" +CCIMailCustomerID().getText());
-													System.out.println("Customer Finance SOPID is     : --------------------->"+SOPID().getText());
+													System.out.println("**************** Customer Account Name : "+arraylist.get(i) + " Account ID : " +CCIMailCustomerID().getText() + "   SOPID : " +SOPID().getText() + "****************");
 													getDriver().navigate().back();
 									}
 									
@@ -300,6 +300,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 						 	billingSelectionNext().click();  
 				    	}
 		    	}	
+				
 				if (str.equals("Brand")){
 					waitFor(3).seconds();
 		    		billingOption().selectByVisibleText("Direct");
@@ -321,10 +322,11 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					   	{
 				    		selectBillingRef().click();
 				    		waitFor(1).seconds();
+				    		i++;
 				    	}
 						   	else 
 						   	{
-						    	System.out.println("Customer Account Name is : -----------------> "+arraylist.get(i));
+//						    	System.out.println("Customer Account Name is : -----------------> "+arraylist.get(i));
 						   		String endUseraccount = arraylist.get(i);
 								accountType().selectByVisibleText(endUseraccount);
 								waitFor(1).seconds();
@@ -383,8 +385,6 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	 waitFor(3).seconds();
 /************************************ Accept Order *************************************************/	 
 				    	 element.findElement(By.xpath("//nav[button='Accept']/button[3]")).click();
-				    	 
-				    	 
 				    	 if(str.equals("Private Advertiser") || str.equals("Direct Advertiser")|| str.equals("Brand")) {
 				    	 waitFor(3).seconds();
 				    	 WebElement prepaymentwindow1 = getDriver().switchTo().activeElement();
@@ -398,7 +398,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	 
 /**************************************************************************/
 				    	 
-				  /*  	 WebDriverWait wait1 = new WebDriverWait(getDriver(), 3);
+				    	/* WebDriverWait wait1 = new WebDriverWait(getDriver(), 3);
 				    	 if(wait1.until(ExpectedConditions.alertIsPresent())!=null)
 				    	      getDriver().switchTo().alert().accept();
 				    	 else {
@@ -411,8 +411,14 @@ public class SalesforceGlueAccountPage  extends PageObject {
 /**************************************************************************/						
 				    	 						waitFor(15).seconds();
 				    	 				    	if (readAccountName().isVisible()) {
-				    	 				    		/*System.out
-													.println("Iteration " +j + " is successful : " + " Customer reference is ------------------> "+ref);*/
+				    	 				    		String financeID = SOPID().getText();
+				    	 				    		waitFor(30).seconds();
+				    	 				    		SearchSOPID().type(financeID);
+				    	 				    		if (orderlink().isVisible())
+				    	 				    		{ 
+				    	 				    			clickOn(orderlink());
+				    	 				    			System.out.println("**************** Customer Order ID is :                                                  " + orderID().getText() + "****************");
+				    	 				    		}
 				    	 				    		accountCreation();
 				    	 				    		j++;
 				    	 					    	
