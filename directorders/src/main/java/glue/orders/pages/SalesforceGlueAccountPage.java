@@ -111,18 +111,18 @@ public class SalesforceGlueAccountPage  extends PageObject {
     
     public void newAccount() {
     	newButton().click();
-    	waitFor(5).second();
+    	
     }
      
     public void newAccountChild(String keyword) {
     	
-    	waitABit(1000);
+    	waitFor(8).second();
     	searchCustomerName().type(keyword);
     	customerSearchButton.click();
     }
     
     public void newAccountButtonFromSearchResultsSection() {
-    	waitABit(4000);
+    	waitFor(6).second();
     	newAccountButtonChild().click();
     }
     
@@ -131,22 +131,21 @@ public class SalesforceGlueAccountPage  extends PageObject {
     	accountMapping.click();
     	waitFor(3).seconds();
     	String ref = customerRef().getText();
-    	waitFor(3).seconds();
     	getDriver().navigate().back();
     	waitFor(8).seconds();
     }
     
     public void accountCreation(){
-    		waitFor(3).seconds();
+    		waitFor(6).seconds();
     		accounts.click();
-    		waitFor(3).seconds();
+    		waitFor(6).seconds();
 			newButton().click();
-			waitFor(3).seconds();
+			waitFor(4).seconds();
 			searchCustomerName().type("xyz");
 	    	customerSearchButton.click();
 	    	waitFor(4).seconds();
 	    	newAccountButtonChild().click();
-	    	waitFor(2).seconds();
+	    	waitFor(3).seconds();
     }
     
 /**************************************************************CSVFile*****************************************************/
