@@ -287,8 +287,8 @@ public class SalesforceGlueAccountPage  extends PageObject {
 							    		billingSelectionNext().click();
 							    		waitFor(2).seconds();
 								    		try {
-								    			 if (syncNext().isVisible()) {
-								    				 waitFor(4).seconds();
+								    			 while (syncNext().isVisible()) {
+								    				 waitFor(8).seconds();
 								    				 syncNext().click();
 								    			 }
 								    			 
