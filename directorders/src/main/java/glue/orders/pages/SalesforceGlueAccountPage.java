@@ -262,7 +262,8 @@ public class SalesforceGlueAccountPage  extends PageObject {
 													privateAdvFinanceAccount.click();   /***** DEPENDENDT ON POSTCODE SUPPLIED*************/
 												} else { financeAccount.click(); }					
 												waitFor(5).seconds();
-													while(SOPID().getText().equals(null)) {
+												String id = SOPID().getText();
+												while(id.equals(null))  {
 														waitFor(2).seconds();
 														getDriver().navigate().back();
 														waitFor(5).seconds();
