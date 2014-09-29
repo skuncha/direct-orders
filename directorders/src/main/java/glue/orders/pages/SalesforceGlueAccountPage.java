@@ -370,7 +370,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	 waitFor(5).seconds();
 				    	 element.findElement(By.xpath("//tbody/tr[6]/td[3]")).click(); // date field
 				    	 waitFor(5).seconds();
-//				    	 element.findElement(By.xpath("//nav[button='Save']/button[2]")).click();
+				    	 element.findElement(By.xpath("//nav[button='Save']/button[2]")).click();
 /*				    	 String orid = (String) element.findElement(By.xpath("//*[@id='salesforce-plugin']/article/aside[1]/div/div/pre")).getText();
 				    	 System.out.println("Order id is   --->"+orid);*/
 				    	 waitFor(12).seconds();
@@ -399,18 +399,16 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	 }
 				    	 
 /**************************************************************************/
+				    	 try {
+					    	 WebDriverWait wait1 = new WebDriverWait(getDriver(), 5);
+					    	 if(wait1.until(ExpectedConditions.alertIsPresent())!=null)
+					    	      getDriver().switchTo().alert().accept();
+					    	 }
+					    	 catch (Exception e) {}
 				    	 
-				    	/* WebDriverWait wait1 = new WebDriverWait(getDriver(), 3);
-				    	 if(wait1.until(ExpectedConditions.alertIsPresent())!=null)
-				    	      getDriver().switchTo().alert().accept();
-				    	 else {
-				    	       System.out.println("alert was not present");
-				    	       
-				    	 }*/
 				    	 getDriver().switchTo().defaultContent();
 /**************************************************************************/						
 				    	 						waitFor(15).seconds();
-				    	 						
 				    	 				    	if (readAccountName().isVisible()) {
 				    	 				    		waitFor(1).minutes();
 				    	 				    		searchTerms.type(financeID);
@@ -426,7 +424,6 @@ public class SalesforceGlueAccountPage  extends PageObject {
 															.println("order id didn't sync yet"); }
 				    	 				    		accountCreation();
 				    	 				    		j++;
-				    	 					    	
 				    	 				    	}
 /*************************************************************************/	
 			}
