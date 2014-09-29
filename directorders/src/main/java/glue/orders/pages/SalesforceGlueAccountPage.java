@@ -260,16 +260,39 @@ public class SalesforceGlueAccountPage  extends PageObject {
 												
 												if (str.equals("Private Advertiser")){
 													privateAdvFinanceAccount.click();   /***** DEPENDENDT ON POSTCODE SUPPLIED*************/
-												} else { financeAccount.click(); }					
+													waitFor(5).seconds();
+													String id = SOPID().getText();
+													while(id.equals(" ")) {
+															waitFor(2).seconds();
+															getDriver().navigate().back();
+															waitFor(5).seconds();
+															accountMapping();
+															privateAdvFinanceAccount.click();
+															waitFor(5).seconds();
+															id = SOPID().getText();
+															/*System.out
+																	.println("Private Advertiser-->"+id);*/
+													}
+												} 
+												else 
+													{ 
+														financeAccount.click(); 
+													}	
+												
 												waitFor(5).seconds();
 												String id = SOPID().getText();
-												while(id.equals(null))  {
+												while(id.equals(" ")) {
 														waitFor(2).seconds();
 														getDriver().navigate().back();
 														waitFor(5).seconds();
 														accountMapping();
+														financeAccount.click();
+														waitFor(5).seconds();
+														id = SOPID().getText();
+														/*System.out
+														.println("Other Advertisers---->"+id);*/
 													}
-										 financeID = SOPID().getText();
+										 financeID = id;
 										System.out.println("          **************** Customer Account Name : "+arraylist.get(i) + " +  Account ID : " +CCIMailCustomerID().getText() + " +   SOPID : " +SOPID().getText() + "  ****************");
 										getDriver().navigate().back();
 									}
@@ -418,7 +441,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	 				    		if (orderlink().isVisible())
 				    	 				    		{ 
 				    	 				    			clickOn(orderlink());
-				    	 				    			System.out.println("          **************** Customer Order ID is :                                                  " + orderID().getText() + "   ****************");
+				    	 				    			System.out.println("**************** Customer Order ID is  :                                                       :" + orderID().getText() + "   ****************");
 				    	 				    		}
 				    	 				    		}catch (Exception e) { System.out
 															.println("order id didn't sync yet"); }
