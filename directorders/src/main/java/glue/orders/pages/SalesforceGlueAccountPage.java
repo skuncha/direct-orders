@@ -412,15 +412,18 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	 						waitFor(15).seconds();
 				    	 						
 				    	 				    	if (readAccountName().isVisible()) {
-				    	 				    		waitFor(2).minutes();
+				    	 				    		waitFor(1).minutes();
 				    	 				    		searchTerms.type(financeID);
 				    	 				    		searchGlue().click();
 				    	 				    		waitFor(3).seconds();
+				    	 				    		try {
 				    	 				    		if (orderlink().isVisible())
 				    	 				    		{ 
 				    	 				    			clickOn(orderlink());
 				    	 				    			System.out.println("          **************** Customer Order ID is :                                                  " + orderID().getText() + "   ****************");
 				    	 				    		}
+				    	 				    		}catch (Exception e) { System.out
+															.println("order id didn't sync yet"); }
 				    	 				    		accountCreation();
 				    	 				    		j++;
 				    	 					    	
