@@ -178,15 +178,15 @@ public class SalesforceGlueAccountPage  extends PageObject {
 			    	billingStreet().type(record.get("billingStreet"));
 			    	billingPostCode().type(record.get("postalCode"));
 
-			    	if (type().getText().equals("Brand")) {
-						parentAccount().type(record.get("parentAccount"));
-						waitABit(1000);
-					}
+					    	if (type().getText().equals("Brand")) {
+								parentAccount().type(record.get("parentAccount"));
+								waitABit(1000);
+							}
 			    	 
-			    	if (str.equals("Private Advertiser")) {
-			    		 salutation().selectByVisibleText(record.get("salutation"));
-		    		     firstname().type(record.get("firstName"));
-			    	}
+					    	if (str.equals("Private Advertiser")) {
+					    		 salutation().selectByVisibleText(record.get("salutation"));
+				    		     firstname().type(record.get("firstName"));
+					    	}
 			    	
 					    	if (str.equals("Direct Advertiser") || str.equals("Charity") || str.equals("Brand")|| str.equals("Client") || str.equals("DMGT Group")) 
 					    	{
@@ -194,61 +194,57 @@ public class SalesforceGlueAccountPage  extends PageObject {
 								saveButton.click();
 								String Name = readAccountName().getText();
 						    	arraylist.add(Name);
-						    	waitABit(5000);
+						    	waitABit(6000);
 	/**************************************************************************/ 
-								    	if (str.equals("Client") || str.equals("DMGT Group")) {
-								    		
-								    		String readClientAccountName = readAccountName().getText();
-								    		String clientURL = getDriver().getCurrentUrl();
-//								    		System.out.println("Client URL is --->"+clientURL); 
-								    		accountCreation();
-								    		selectAccountType().selectByVisibleText("Agency"); //Create Billing a/c
-								    		continueButt().click();
-											waitABit(3000);
-											accountName().type(record.get("lastName") + s);
-								    		phoneNumber().type(record.get("phone"));
-									    	billingStreet().type(record.get("billingStreet"));
-									    	billingPostCode().type(record.get("postalCode"));
-									    	waitABit(1000);
-											saveButton.click();
-											waitABit(5000);
-											newRelationship.click(); 
-											waitABit(3000);
-											accountB_Name().type(readClientAccountName);
-									    	billing().selectByVisibleText("Billing");
-									    	saveRelationship.click();
-									    	waitABit(6000);	
-									    	getDriver().get(clientURL); // come back to client a/c page
-									    	waitABit(6000);	
-								    	}
-	/************** Select Industry Category **********************************/ 
-						    	
-						    	getDriver().switchTo().frame("066D0000000kh27");
-						    	WebElement editable = getDriver().switchTo().activeElement();
-						    	editable.findElement(By.cssSelector("input[name='j_id0:j_id1:j_id27:j_id28:j_id31']")).click();
-						    	waitFor(4).seconds();
-					    	   	mainCate().selectByVisibleText(record.get("mainCategory"));
-					    	   	waitFor(4).seconds();
-						 	    subCate().selectByVisibleText(record.get("subCategory"));
-						 	    waitFor(4).seconds();
-						 	    minorCate().selectByVisibleText(record.get("minorCategory"));
-						 	    waitFor(5).seconds();
-						 	    saveIndCate().sendKeys(Keys.RETURN);
-						 	    waitFor(4).seconds();
-							    getDriver().switchTo().defaultContent();
+									    	if (str.equals("Client") || str.equals("DMGT Group")) 
+									    	{
+										    		String readClientAccountName = readAccountName().getText();
+										    		String clientURL = getDriver().getCurrentUrl();
+		//								    		System.out.println("Client URL is --->"+clientURL); 
+										    		accountCreation();
+										    		selectAccountType().selectByVisibleText("Agency"); //Create Billing a/c
+										    		continueButt().click();
+													waitABit(3000);
+													accountName().type(record.get("lastName") + s);
+										    		phoneNumber().type(record.get("phone"));
+											    	billingStreet().type(record.get("billingStreet"));
+											    	billingPostCode().type(record.get("postalCode"));
+											    	waitABit(1000);
+													saveButton.click();
+													waitABit(5000);
+													newRelationship.click(); 
+													waitABit(3000);
+													accountB_Name().type(readClientAccountName);
+											    	billing().selectByVisibleText("Billing");
+											    	saveRelationship.click();
+											    	waitABit(6000);	
+											    	getDriver().get(clientURL); // come back to client a/c page
+											    	waitABit(6000);	
+									    	}
+									    	 /************** Select Industry Category **********************************/
+							    	getDriver().switchTo().frame("066D0000000kh27");
+							    	WebElement editable = getDriver().switchTo().activeElement();
+							    	editable.findElement(By.cssSelector("input[name='j_id0:j_id1:j_id27:j_id28:j_id31']")).click();
+							    	waitFor(4).seconds();
+						    	   	mainCate().selectByVisibleText(record.get("mainCategory"));
+						    	   	waitFor(4).seconds();
+							 	    subCate().selectByVisibleText(record.get("subCategory"));
+							 	    waitFor(4).seconds();
+							 	    minorCate().selectByVisibleText(record.get("minorCategory"));
+							 	    waitFor(5).seconds();
+							 	    saveIndCate().sendKeys(Keys.RETURN);
+							 	    waitFor(4).seconds();
+								    getDriver().switchTo().defaultContent();
 					    	}
-/************** Select Industry Category **********************************/ 						    
-				    	else {
-				    		
-				    	saveButton.click();
-				    	String Name = readAccountName().getText();
-				    	arraylist.add(Name);
-				    	waitABit(5000);
-				    	
-				    	}
+						    	else 
+						    	{
+						    	saveButton.click();
+						    	String Name = readAccountName().getText();
+						    	arraylist.add(Name);
+						    	waitABit(6000);
+						    	}
 
 /**************  CCI Integration  *******************************************/  				    	
-				    	
 				    	
 				    	CCICustomerMail().click();
 				    	waitFor(8).seconds();
@@ -272,43 +268,44 @@ public class SalesforceGlueAccountPage  extends PageObject {
 														waitFor(5).seconds();
 														accountMapping();
 													}
-													System.out.println("          **************** Customer Account Name : "+arraylist.get(i) + " +  Account ID : " +CCIMailCustomerID().getText() + " +   SOPID : " +SOPID().getText() + "  ****************");
-													getDriver().navigate().back();
+										System.out.println("          **************** Customer Account Name : "+arraylist.get(i) + " +  Account ID : " +CCIMailCustomerID().getText() + " +   SOPID : " +SOPID().getText() + "  ****************");
+										getDriver().navigate().back();
 									}
-									
 						waitFor(5).seconds();
 						createDirectOrder().click();
 								
 /**************  Select Order Type ******************************************/
 				    	
-				if (str.equals("Direct Advertiser") || str.equals("Charity") || str.equals("Client") || str.equals("DMGT Group")) 
-		    	{
-						waitFor(6).seconds();
-				    	
-				    	if (str.equals("Client") || str.equals("DMGT Group")) {
-				    		billingRef().click();
-				    		billingSelectionNext().click();
-				    		waitFor(2).seconds();
-				    		try {
-				    			 if (syncNext().isVisible()) {
-				    				 waitFor(4).seconds();
-				    				 syncNext().click();
-				    			 }
-				    			 
-				    		} catch (Exception e) { e.printStackTrace();}
-				    	}
-				    	else {
-				    		
-				    		billingSelection().selectByVisibleText("Direct");
-						 	billingSelectionNext().click();  
-				    	}
-		    	}	
+						if (str.equals("Direct Advertiser") || str.equals("Charity") || str.equals("Client") || str.equals("DMGT Group")) 
+				    	{
+							waitFor(6).seconds();
+							
+							    	if (str.equals("Client") || str.equals("DMGT Group"))
+							    	{
+							    		billingRef().click();
+							    		billingSelectionNext().click();
+							    		waitFor(2).seconds();
+								    		try {
+								    			 if (syncNext().isVisible()) {
+								    				 waitFor(4).seconds();
+								    				 syncNext().click();
+								    			 }
+								    			 
+								    		} catch (Exception e) { e.printStackTrace();}
+							    	}
+							    	else {
+							    		
+							    		billingSelection().selectByVisibleText("Direct");
+									 	billingSelectionNext().click();  
+							    	}
+				    	}	
 				
-				if (str.equals("Brand")){
-					waitFor(3).seconds();
-		    		billingOption().selectByVisibleText("Direct");
-		    		billingSelectionNext().click(); 
-		    	}
+					if (str.equals("Brand"))
+					{
+						waitFor(3).seconds();
+			    		billingOption().selectByVisibleText("Direct");
+			    		billingSelectionNext().click(); 
+			    	}
 					 	
 /**************  Create Contact ********************************************/
 					 	
