@@ -23,17 +23,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * @author Srinivasa.Kuncha
- *
+ * @see directorders
  */
 public class SalesforceGlueAccountPage  extends PageObject {
 	//example 	yyMMddHHmmss = 010704120856 
-		DateFormat dateFormat = new SimpleDateFormat("HHMMSS");
+		DateFormat dateFormat = new SimpleDateFormat("yyMMddHHmmss");
 		Calendar cal = Calendar.getInstance();
 		String s = dateFormat.format(cal.getTime());
 		int i=0;
 		int j=0;
 		String financeID;
-		long timeNow = System.currentTimeMillis();
+//		long timeNow = System.currentTimeMillis();
 		ArrayList<String> arraylist = new ArrayList<String>(); 
 
 /***********************************************************************WEB ELEMENTS************************************************************************************/
@@ -180,7 +180,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    waitFor(5).seconds();
 					    String str = record.get("accountType");
 					    selectTypeOfAccount().selectByVisibleText(record.get("accountType"));
-				    	accountName().type(record.get("lastName") + " - "+ timeNow);
+				    	accountName().type(record.get("lastName") + " - "+ s);
 				    	phoneNumber().type(record.get("phone"));
 				    	billingStreet().type(record.get("billingStreet"));
 				    	billingPostCode().type(record.get("postalCode"));
@@ -211,7 +211,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 											    		selectAccountType().selectByVisibleText("Agency"); //Create Billing a/c
 											    		continueButt().click();
 											    		waitFor(3).seconds();
-														accountName().type("Billing Agency " + timeNow);
+														accountName().type("Billing Agency " + s);
 											    		phoneNumber().type(record.get("phone"));
 												    	billingStreet().type(record.get("billingStreet"));
 												    	billingPostCode().type(record.get("postalCode"));
