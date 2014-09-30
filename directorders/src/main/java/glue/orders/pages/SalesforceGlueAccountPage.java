@@ -173,14 +173,13 @@ public class SalesforceGlueAccountPage  extends PageObject {
 						
 					    selectAccountType().selectByVisibleText(record.get("type"));
 					    continueButt().click();
-					    waitABit(1000);
-						
+					    long timeNow = System.currentTimeMillis();
 	/************** Supply User Account details ********************************/  
 					  
 					    waitFor(5).seconds();
 					    String str = record.get("accountType");
 					    selectTypeOfAccount().selectByVisibleText(record.get("accountType"));
-				    	accountName().type(record.get("lastName") + " - "+ s);
+				    	accountName().type(record.get("lastName") + " - "+ timeNow);
 				    	phoneNumber().type(record.get("phone"));
 				    	billingStreet().type(record.get("billingStreet"));
 				    	billingPostCode().type(record.get("postalCode"));
@@ -211,7 +210,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 											    		selectAccountType().selectByVisibleText("Agency"); //Create Billing a/c
 											    		continueButt().click();
 											    		waitFor(3).seconds();
-														accountName().type("Billing Agency " + s);
+														accountName().type("Billing Agency " + timeNow);
 											    		phoneNumber().type(record.get("phone"));
 												    	billingStreet().type(record.get("billingStreet"));
 												    	billingPostCode().type(record.get("postalCode"));
