@@ -33,6 +33,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 		int i=0;
 		int j=0;
 		String financeID;
+		long timeNow = System.currentTimeMillis();
 		ArrayList<String> arraylist = new ArrayList<String>(); 
 
 /***********************************************************************WEB ELEMENTS************************************************************************************/
@@ -123,7 +124,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	    public void newAccountButtonFromSearchResultsSection() {
 	    	waitFor(6).second();
 	    	newAccountButtonChild().click();
-	    	System.out.println("\n");
+	    	
 	    }
 	    
 	    public void accountMapping(){
@@ -160,7 +161,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	    
 	/**************************************************************CSVFile*****************************************************/
 	    public void read_input(String fileLoc) {
-
+	    	System.out.println("\n");
 			File filePath = new File(fileLoc);
 			if (filePath.isFile()) {
 				String file = filePath.getAbsolutePath();
@@ -210,7 +211,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 											    		selectAccountType().selectByVisibleText("Agency"); //Create Billing a/c
 											    		continueButt().click();
 											    		waitFor(3).seconds();
-														accountName().type("Billing Agency" + s);
+														accountName().type("Billing Agency " + timeNow);
 											    		phoneNumber().type(record.get("phone"));
 												    	billingStreet().type(record.get("billingStreet"));
 												    	billingPostCode().type(record.get("postalCode"));
@@ -337,7 +338,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 									    				 waitFor(30).seconds();
 									    				 syncNext().click();
 									    			 }
-									    		} catch (Exception e) { e.printStackTrace(); }
+									    		} catch (Exception e) {}
 								    	}
 								    	else {
 								    		
