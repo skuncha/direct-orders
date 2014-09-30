@@ -27,7 +27,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class SalesforceGlueAccountPage  extends PageObject {
 	//example 	yyMMddHHmmss = 010704120856 
-		DateFormat dateFormat = new SimpleDateFormat("yyMMddHHmmss");
+		DateFormat dateFormat = new SimpleDateFormat("HHmmss.SSS");
 		Calendar cal = Calendar.getInstance();
 		String s = dateFormat.format(cal.getTime());
 		int i=0;
