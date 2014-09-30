@@ -123,6 +123,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	    public void newAccountButtonFromSearchResultsSection() {
 	    	waitFor(6).second();
 	    	newAccountButtonChild().click();
+	    	System.out.println("\n");
 	    }
 	    
 	    public void accountMapping(){
