@@ -180,7 +180,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    waitFor(5).seconds();
 					    String str = record.get("accountType");
 					    selectTypeOfAccount().selectByVisibleText(record.get("accountType"));
-				    	accountName().type(record.get("lastName") + s);
+				    	accountName().type(record.get("lastName") + " - "+ timeNow);
 				    	phoneNumber().type(record.get("phone"));
 				    	billingStreet().type(record.get("billingStreet"));
 				    	billingPostCode().type(record.get("postalCode"));
