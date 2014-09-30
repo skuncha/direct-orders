@@ -463,7 +463,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 				    			System.out.println("          **************** Customer Order ID is  : " + orderID().getText());
 					    	 				    		}
 					    	 				    		}catch (Exception e) { System.out
-																.println("          ****************                              ORDER ID DIDn'T SYNC BACK TO GLUE YET :                 							   ****************"); }
+																.println("          ****************                             ******* ORDER ID DIDn'T SYNC BACK TO GLUE YET *******"); }
 					    	 				    		accountCreation();
 					    	 				    		j++;
 					    	 				    	}
