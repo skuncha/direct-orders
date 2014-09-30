@@ -26,8 +26,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  *
  */
 public class SalesforceGlueAccountPage  extends PageObject {
-	
-	DateFormat dateFormat = new SimpleDateFormat("MMSS");
+//example 	yyMMddHHmmss = 010704120856 
+	DateFormat dateFormat = new SimpleDateFormat("HHMMSS");
 	Calendar cal = Calendar.getInstance();
 	String s = dateFormat.format(cal.getTime());
 	int i=0;
@@ -35,7 +35,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	String financeID;
 	ArrayList<String> arraylist = new ArrayList<String>(); 
 
-	/***/
+	/***********************************************************************WEB ELEMENTS************************************************************************************/
 	
 	private WebElementFacade salutation() 		 { return element(By.id("00ND0000005jggD"));							}
 	private WebElementFacade firstname() 		 { return element(By.id("00ND0000005jgg9"));							}
@@ -80,10 +80,8 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	@FindBy(how = How.PARTIAL_LINK_TEXT, using = "AM-")
 	private WebElement accountMapping;
 	private WebElementFacade customerRef()        { return element(By.xpath("//*[@id='00ND0000005WVcQ_ileinner']"));		}
-
 	@FindBy(how = How.PARTIAL_LINK_TEXT, using = "-Mail Advertising")
 	private WebElement financeAccount;
-	
 	@FindBy(how = How.PARTIAL_LINK_TEXT, using = "W8 5TT")
 	private WebElement privateAdvFinanceAccount;
 	private WebElementFacade FinanceAccNum()     { return element(By.xpath(".//*[@id='ep']/div[2]/div[2]/table/tbody/tr[3]/td[2]"));}
@@ -98,16 +96,13 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	private WebElementFacade billingRef()        { return element(By.xpath("//*[@id='j_id0:j_id1:i:f:pb:d:Billing_AgenciesList.input']/option[1]")); }
 	private WebElementFacade selectBillingRef()  { return element(By.xpath("//*[@id='j_id0:j_id1:i:f:pb:d:Account4Contact.input']/option[1]"));		 }
 	private WebElementFacade syncNext() 		 { return element(By.id("j_id0:j_id1:i:f:pb:pbb:bottom:next"));				                         }
-//	private WebElementFacade SearchSOPID() 		 { return element(By.xpath(".//*[@id='phSearchInput']"));				                         	 }
 	private WebElementFacade searchGlue() 		 { return element(By.id("phSearchButton"));				                         	 				 }
-//	private WebElementFacade searchText() 		 { return element(By.id("secondSearchText"));				                         	 			 }
-	private WebElementFacade secondSearch() 		 { return element(By.xpath(".//*[@id='secondSearchButton']"));				                  	 }
 	private WebElementFacade orderlink() 		 { return element(By.xpath("//*[@id='Order_body']/table/tbody/tr[2]/th/a"));						 }
 	private WebElementFacade orderID() 			 { return element(By.xpath("//*[@id='ep']/div[2]/div[2]/table/tbody/tr[10]/td[2]"));                 }
-
     @FindBy(xpath="//div/input")
     private WebElementFacade searchTerms;
 	
+    /***********************************************************************WEB ELEMENTS************************************************************************************/
 	public void type(String mytype) {
     	Select droplist = new Select(find(By.id("acc6")));   
     	droplist.selectByVisibleText(mytype);
@@ -173,7 +168,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    waitFor(5).seconds();
 				    String str = record.get("accountType");
 				    selectTypeOfAccount().selectByVisibleText(record.get("accountType"));
-			    	accountName().type( s + record.get("lastName"));
+			    	accountName().type(record.get("lastName") + s);
 			    	phoneNumber().type(record.get("phone"));
 			    	billingStreet().type(record.get("billingStreet"));
 			    	billingPostCode().type(record.get("postalCode"));
@@ -265,8 +260,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 													while(id.equals(" ")) {
 															waitFor(2).seconds();
 															getDriver().navigate().back();
-															waitFor(5).seconds();
-															accountMapping();
+															waitFor(10).seconds();
 															privateAdvFinanceAccount.click();
 															waitFor(5).seconds();
 															id = SOPID().getText();
@@ -284,8 +278,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 												while(id.equals(" ")) {
 														waitFor(2).seconds();
 														getDriver().navigate().back();
-														waitFor(5).seconds();
-														accountMapping();
+														waitFor(10).seconds();
 														financeAccount.click();
 														waitFor(5).seconds();
 														id = SOPID().getText();
@@ -299,7 +292,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 						waitFor(5).seconds();
 						createDirectOrder().click();
 								
-/**************  Select Order Type ******************************************/
+/**************  Select Order Type *************************************************************/
 				    	
 						if (str.equals("Direct Advertiser") || str.equals("Charity") || str.equals("Client") || str.equals("DMGT Group")) 
 				    	{
@@ -324,15 +317,13 @@ public class SalesforceGlueAccountPage  extends PageObject {
 									 	billingSelectionNext().click();  
 							    	}
 				    	}	
-				
 					if (str.equals("Brand"))
 					{
 						waitFor(3).seconds();
 			    		billingOption().selectByVisibleText("Direct");
 			    		billingSelectionNext().click(); 
 			    	}
-					 	
-/**************  Create Contact ********************************************/
+/**************  Create Contact ******************************************************************/
 					 	
 					 	waitFor(4).seconds();
 						conSalutation().selectByVisibleText(record.get("salutation"));
@@ -341,7 +332,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	emailAddress().type(record.get("email"));
 					   	conPhonenumebr().type(record.get("phone"));
 					   	
-/**************  Associate Account******************************************/				    	
+/**************  Associate Account*****************************************************************/				    	
 				    	
 					   	if (str.equals("Client") || str.equals("DMGT Group")) 
 					   	{
@@ -361,7 +352,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 						waitFor(1).seconds();
 						finish().click();
 						
-/************** Launch OrderPlugin and Create Order******************************************/
+/************** Launch OrderPlugin and Create Order*************************************************/
 						
 						 waitFor(20).seconds();
 				    	 getDriver().switchTo().frame(getDriver().findElement(By.tagName("iframe")));
@@ -374,7 +365,8 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	 element.findElement(By.id("Order.Identification:order.message")).sendKeys(record.get("urgentNote"));
 				    	 element.findElement(By.id("Order.SalesTerritory:order.primarySalesRep.id")).sendKeys("Tom Leader");
 				    	 waitFor(1).seconds();
-/************************************ Package Details* ************************************************/
+				    	 
+/************************************ Package Details* **********************************************/
 				    	 element.findElement(By.xpath("//h4/a/span/input")).click();  	
 				    	 waitFor(5).seconds();
 				    	 element.findElement(By.xpath("//h4/a/span/input")).click(); 
@@ -401,7 +393,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	 droplist.selectByVisibleText(record.get("module"));
 				    	 waitFor(5).seconds();
 				    	 
- /************************************ Price Details *************************************************/
+ /************************************ Price Details ***********************************************/
 				    	 element.findElement(By.xpath(".//*[@id='SchedulingAccordion']/div/div[3]/div[1]/h4/a/span")).click();
 				    	 waitFor(5).seconds();
 				    	 element.findElement(By.id("Order.Price:UserRevenue")).sendKeys(record.get("revenue"));
@@ -420,8 +412,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	 waitFor(1).seconds();
 				    	 prepaymentwindow2.findElement(By.xpath("//input[@value='OK']")).click();
 				    	 }
-				    	 
-/**************************************************************************/
+/*************************************************************************************************/
 				    	 try {
 					    	 WebDriverWait wait1 = new WebDriverWait(getDriver(), 5);
 					    	 if(wait1.until(ExpectedConditions.alertIsPresent())!=null)
@@ -430,7 +421,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 catch (Exception e) {}
 				    	 
 				    	 getDriver().switchTo().defaultContent();
-/**************************************************************************/						
+/************************************************************************************************/						
 				    	 						waitFor(15).seconds();
 				    	 				    	if (readAccountName().isVisible()) {
 				    	 				    		waitFor(1).minutes();
@@ -441,14 +432,14 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	 				    		if (orderlink().isVisible())
 				    	 				    		{ 
 				    	 				    			clickOn(orderlink());
-				    	 				    			System.out.println("**************** Customer Order ID is  :                                                       :" + orderID().getText() + "   ****************");
+				    	 				    			System.out.println("          **************** Customer Order ID is  :                                                       :" + orderID().getText() + "  ****************");
 				    	 				    		}
 				    	 				    		}catch (Exception e) { System.out
 															.println("order id didn't sync yet"); }
 				    	 				    		accountCreation();
 				    	 				    		j++;
 				    	 				    	}
-/*************************************************************************/	
+/**********************************************************************************************/	
 			}
 			} catch (IOException e1) {
 				e1.printStackTrace();
