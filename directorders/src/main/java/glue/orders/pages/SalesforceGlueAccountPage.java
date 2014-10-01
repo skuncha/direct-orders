@@ -225,13 +225,14 @@ public class SalesforceGlueAccountPage  extends PageObject {
 														while(id.equals(" ")) {
 																waitFor(2).seconds();
 																getDriver().navigate().back();
-																waitFor(10).seconds();
+																waitFor(30).seconds();
 																financeAccount.click();
 																waitFor(5).seconds();
 																id = SOPID().getText();
+																synctimeforSOPID = synctimeforSOPID + 30;
 															}
 														financeID = id;
-														System.out.println(j + " . " + "          **************** Customer Account Name : "+arraylist.get(i) +  " +  SOPID : " +SOPID().getText() + "  ****************");
+														System.out.println("***** " +j + ". " + "Customer Account Name : "+arraylist.get(i) +  " +  SOPID : " +SOPID().getText() + " + ");
 														getDriver().navigate().back();
 														waitFor(8).seconds();
 														newRelationship.click(); 
@@ -307,14 +308,14 @@ public class SalesforceGlueAccountPage  extends PageObject {
 													while(id.equals(" ")) {
 															waitFor(2).seconds();
 															getDriver().navigate().back();
-															waitFor(10).seconds();
+															waitFor(30).seconds();
 															financeAccount.click();
 															waitFor(5).seconds();
 															id = SOPID().getText();
 															synctimeforSOPID = synctimeforSOPID + 30;
 														}
 											 financeID = id;
-											System.out.println(j + " . " + "          **************** Customer Account Name : "+arraylist.get(i) + " +  Account ID : " +CCIMailCustomerID().getText() + " +  SOPID : " +SOPID().getText() + " ");
+											System.out.println("***** " +j + ". " +"Customer Account Name : "+arraylist.get(i) + " +  Account ID : " +CCIMailCustomerID().getText() + " +  SOPID : " +SOPID().getText() + " + ");
 											getDriver().navigate().back();
 										}
 							waitFor(5).seconds();
@@ -463,12 +464,12 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 				    		if (orderlink().isVisible())
 					    	 				    		{ 
 					    	 				    			clickOn(orderlink());
-					    	 				    			System.out.println(" + Customer Order ID is  : " + orderID().getText());
+					    	 				    			System.out.print(" + Customer Order ID is  : " + orderID().getText());
 					    	 				    		}
 					    	 				    		}catch (Exception e) { System.out
-																.print(" + ******* ORDER ID DIDn'T SYNC BACK TO GLUE YET *******"); }
+																.print(" *** ORDER ID DIDn'T SYNC BACK TO GLUE YET *** "); }
 					    	 				    		accountCreation();
-					    	 				    		System.out.println("-------------------------------> SYNC WAIT TIME     : "+synctimeforSOPID + " SECONDS");
+					    	 				    		System.out.println("*****  SYNC WAIT TIME FOR SOPID IS     : "+synctimeforSOPID + " SECONDS");
 					    	 				    		j++;
 					    	 				    		synctimeforSOPID =0;
 					    	 				    	}
