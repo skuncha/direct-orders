@@ -26,12 +26,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @see directorders
  */
 public class SalesforceGlueAccountPage  extends PageObject {
-	//example 	yyMMddHHmmss = 010704120856 
+	    /*example 	yyMMddHHmmss = 010704120856 
 		DateFormat dateFormat = new SimpleDateFormat("HHmmss.SSS");
 		Calendar cal = Calendar.getInstance();
-		String s = dateFormat.format(cal.getTime());
+		String s = dateFormat.format(cal.getTime());*/
 		int i=0;
 		int j=0;
+		int synctimeforSOPID = 0;
 		String financeID;
 //		long timeNow = System.currentTimeMillis();
 		ArrayList<String> arraylist = new ArrayList<String>(); 
@@ -230,7 +231,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 																id = SOPID().getText();
 															}
 														financeID = id;
-														System.out.println("          **************** Customer Account Name : "+arraylist.get(i) +  " +  SOPID : " +SOPID().getText() + "  ****************");
+														System.out.println(j + " . " + "          **************** Customer Account Name : "+arraylist.get(i) +  " +  SOPID : " +SOPID().getText() + "  ****************");
 														getDriver().navigate().back();
 														waitFor(8).seconds();
 														newRelationship.click(); 
@@ -287,10 +288,11 @@ public class SalesforceGlueAccountPage  extends PageObject {
 														while(id.equals(" ")) {
 																waitFor(2).seconds();
 																getDriver().navigate().back();
-																waitFor(10).seconds();
+																waitFor(30).seconds();
 																privateAdvFinanceAccount.click();
 																waitFor(5).seconds();
 																id = SOPID().getText();
+																synctimeforSOPID = synctimeforSOPID + 30;
 																/*System.out
 																		.println("Private Advertiser-->"+id);*/
 														}
@@ -309,11 +311,10 @@ public class SalesforceGlueAccountPage  extends PageObject {
 															financeAccount.click();
 															waitFor(5).seconds();
 															id = SOPID().getText();
-															/*System.out
-															.println("Other Advertisers---->"+id);*/
+															synctimeforSOPID = synctimeforSOPID + 30;
 														}
 											 financeID = id;
-											System.out.println("          **************** Customer Account Name : "+arraylist.get(i) + " +  Account ID : " +CCIMailCustomerID().getText() + " +  SOPID : " +SOPID().getText() + "  ****************");
+											System.out.println(j + " . " + "          **************** Customer Account Name : "+arraylist.get(i) + " +  Account ID : " +CCIMailCustomerID().getText() + " +  SOPID : " +SOPID().getText() + " ");
 											getDriver().navigate().back();
 										}
 							waitFor(5).seconds();
@@ -327,17 +328,19 @@ public class SalesforceGlueAccountPage  extends PageObject {
 								
 								    	if (str.equals("Client") || str.equals("DMGT Group"))
 								    	{
+								    		
 								    		billingRef().click();
 								    		billingSelectionNext().click();
 								    		waitFor(5).seconds();
 									    		try {
-									    			/*System.out
-															.println("---------------------------------------------------->"+busyIntegrating().getText());*/
 									    			 while(busyIntegrating().getText()!=null) {
+									    				 
 									    				 waitFor(30).seconds();
 									    				 syncNext().click();
+									    				 synctimeforSOPID = synctimeforSOPID + 30;
 									    			 }
 									    		} catch (Exception e) {}
+									    		
 								    	}
 								    	else {
 								    		
@@ -356,7 +359,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 						 	waitFor(4).seconds();
 							conSalutation().selectByVisibleText(record.get("salutation"));
 			    		    conFirstName().type(record.get("firstName"));
-			    		    conLastName().type(s + record.get("lastName"));
+			    		    conLastName().type(timeNow + record.get("lastName"));
 					    	emailAddress().type(record.get("email"));
 						   	conPhonenumebr().type(record.get("phone"));
 						   	
@@ -460,12 +463,14 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 				    		if (orderlink().isVisible())
 					    	 				    		{ 
 					    	 				    			clickOn(orderlink());
-					    	 				    			System.out.println("          **************** Customer Order ID is  : " + orderID().getText());
+					    	 				    			System.out.println(" + Customer Order ID is  : " + orderID().getText());
 					    	 				    		}
 					    	 				    		}catch (Exception e) { System.out
-																.println("          ****************                             ******* ORDER ID DIDn'T SYNC BACK TO GLUE YET *******"); }
+																.print(" + ******* ORDER ID DIDn'T SYNC BACK TO GLUE YET *******"); }
 					    	 				    		accountCreation();
+					    	 				    		System.out.println("-------------------------------> SYNC WAIT TIME     : "+synctimeforSOPID + " SECONDS");
 					    	 				    		j++;
+					    	 				    		synctimeforSOPID =0;
 					    	 				    	}
 	/**********************************************************************************************/	
 				}
