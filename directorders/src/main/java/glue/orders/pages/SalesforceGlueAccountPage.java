@@ -32,7 +32,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 		String s = dateFormat.format(cal.getTime());*/
 		int i=0;
 		int j=0;
-		int synctimeforSOPID = 0;
+		int synctimeforSOPID = 5;
 		String financeID;
 //		long timeNow = System.currentTimeMillis();
 		ArrayList<String> arraylist = new ArrayList<String>(); 
@@ -225,14 +225,14 @@ public class SalesforceGlueAccountPage  extends PageObject {
 														while(id.equals(" ")) {
 																waitFor(2).seconds();
 																getDriver().navigate().back();
-																waitFor(30).seconds();
+																waitFor(20).seconds();
 																financeAccount.click();
 																waitFor(5).seconds();
 																id = SOPID().getText();
-																synctimeforSOPID = synctimeforSOPID + 30;
+																synctimeforSOPID = synctimeforSOPID + 25;
 															}
 														financeID = id;
-														System.out.println("***** " +j + ". " + "Customer Account Name : "+arraylist.get(i) +  " +  SOPID : " +SOPID().getText() + " + ");
+														System.out.println("***** " +j + ". " + "A/C Name : "+arraylist.get(i) +  " +  SOPID : " +SOPID().getText() + " + ");
 														getDriver().navigate().back();
 														waitFor(8).seconds();
 														newRelationship.click(); 
@@ -289,11 +289,11 @@ public class SalesforceGlueAccountPage  extends PageObject {
 														while(id.equals(" ")) {
 																waitFor(2).seconds();
 																getDriver().navigate().back();
-																waitFor(30).seconds();
+																waitFor(20).seconds();
 																privateAdvFinanceAccount.click();
 																waitFor(5).seconds();
 																id = SOPID().getText();
-																synctimeforSOPID = synctimeforSOPID + 30;
+																synctimeforSOPID = synctimeforSOPID + 25;
 																/*System.out
 																		.println("Private Advertiser-->"+id);*/
 														}
@@ -308,14 +308,14 @@ public class SalesforceGlueAccountPage  extends PageObject {
 													while(id.equals(" ")) {
 															waitFor(2).seconds();
 															getDriver().navigate().back();
-															waitFor(30).seconds();
+															waitFor(20).seconds();
 															financeAccount.click();
 															waitFor(5).seconds();
 															id = SOPID().getText();
-															synctimeforSOPID = synctimeforSOPID + 30;
+															synctimeforSOPID = synctimeforSOPID + 25;
 														}
 											 financeID = id;
-											System.out.println("***** " +j + ". " +"Customer Account Name : "+arraylist.get(i) + " +  Account ID : " +CCIMailCustomerID().getText() + " +  SOPID : " +SOPID().getText() + " + ");
+											System.out.println("***** " +j + ". " +"A/C Name : "+arraylist.get(i) + " +  A/C ID : " +CCIMailCustomerID().getText() + " +  SOPID : " +SOPID().getText() + " + ");
 											getDriver().navigate().back();
 										}
 							waitFor(5).seconds();
@@ -464,10 +464,10 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 				    		if (orderlink().isVisible())
 					    	 				    		{ 
 					    	 				    			clickOn(orderlink());
-					    	 				    			System.out.print(" + Customer Order ID is  : " + orderID().getText());
+					    	 				    			System.out.print(" Order ID : " + orderID().getText());
 					    	 				    		}
 					    	 				    		}catch (Exception e) { System.out
-																.print(" *** ORDER ID DIDn'T SYNC BACK TO GLUE YET *** "); }
+																.print(" *** ORDER ID DIDN'T SYNC BACK TO GLUE WITH IN 60 SECONDS \n "); }
 					    	 				    		accountCreation();
 					    	 				    		System.out.println("*****  SYNC WAIT TIME FOR SOPID IS     : "+synctimeforSOPID + " SECONDS");
 					    	 				    		j++;
