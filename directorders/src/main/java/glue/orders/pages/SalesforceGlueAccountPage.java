@@ -467,7 +467,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 				    		}catch (Exception e) { System.out
 																.print(" *** ORDER ID DIDN'T SYNC BACK TO GLUE WITH IN 60 SECONDS"); }
 					    	 				    		accountCreation();
-					    	 				    		System.out.println("\n *****  SYNC WAIT TIME FOR SOPID IS     : "+synctimeforSOPID + " SECONDS");
+					    	 				    		System.out.println("\n*****     SYNC WAIT TIME FOR SOPID IS  : "+synctimeforSOPID + " SECONDS");
 					    	 				    		j++;
 					    	 				    		synctimeforSOPID =10;
 					    	 				    	}
