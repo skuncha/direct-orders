@@ -32,7 +32,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 		String s = dateFormat.format(cal.getTime());*/
 		int i=0;
 		int j=0;
-		int synctimeforSOPID = 5;
+		int synctimeforSOPID = 10;
 		String financeID;
 		ArrayList<String> arraylist = new ArrayList<String>(); 
 
@@ -70,7 +70,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 		private WebElementFacade conFirstName() 		{ return element(By.id("j_id0:j_id1:i:f:pb:d:FirstName.input"));			}
 		private WebElementFacade conLastName() 			{ return element(By.id("j_id0:j_id1:i:f:pb:d:LastName.input"));				}
 		private WebElementFacade conPhonenumebr() 		{ return element(By.id("j_id0:j_id1:i:f:pb:d:Phone.input"));				}
-		private WebElementFacade orderId() 				{ return element(By.xpath("//*[@id='salesforce-plugin']/article/aside[1]/div/div/pre"));		}
+		private WebElementFacade orderId() 				{ return element(By.xpath("//*[@id='salesforce-plugin']/article/aside[1]/div/div/pre"));	}
 		
 		@FindBy(how = How.LINK_TEXT, using = "Accounts")
 		private WebElement accounts;
@@ -80,7 +80,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 		private WebElement saveButton;
 		@FindBy(how = How.PARTIAL_LINK_TEXT, using = "AM-")
 		private WebElement accountMapping;
-		private WebElementFacade customerRef()        { return element(By.xpath("//*[@id='00ND0000005WVcQ_ileinner']"));		}
+		private WebElementFacade customerRefAccountMapping()        { return element(By.xpath("//*[@id='00ND0000005WVcQ_ileinner']")); }
 		@FindBy(how = How.PARTIAL_LINK_TEXT, using = "-Mail Advertising")
 		private WebElement financeAccount;
 		@FindBy(how = How.PARTIAL_LINK_TEXT, using = "W8 5TT")
@@ -130,7 +130,6 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	    	
 	    	accountMapping.click();
 	    	waitFor(3).seconds();
-//	    	String ref = customerRef().getText();
 	    	getDriver().navigate().back();
 	    	waitFor(8).seconds();
 	    }
@@ -230,7 +229,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 																synctimeforSOPID = synctimeforSOPID + 25;
 															}
 														financeID = id;
-														System.out.print("***** " +j + ". " + "A/C Name : "+arraylist.get(i) +  " +  SOPID : " +SOPID().getText() + " + ");
+														System.out.print("***** " +j + ". " + "Cusomer Account Name : "+arraylist.get(i) +  " +  SOPID : " +SOPID().getText() + " + ");
 														getDriver().navigate().back();
 														waitFor(8).seconds();
 														newRelationship.click(); 
@@ -264,24 +263,14 @@ public class SalesforceGlueAccountPage  extends PageObject {
 							    	arraylist.add(Name);
 							    	waitFor(6).seconds();
 							    	}
-
-	/**************  CCI Integration  *******************************************/  				    	
-					    	
-					    	/*CCICustomerMail().click();
-					    	waitFor(8).seconds();
-							getDriver().switchTo().alert().accept();  
-							waitFor(15).seconds();
-							getDriver().switchTo().alert().accept(); 
-							waitFor(8).seconds();*/
-							
 										if (str.equals("Direct Advertiser") || str.equals("Charity") || str.equals("Brand")|| str.equals("Private Advertiser")){
 													
-											        CCIMailIntegration(); // CCIMail Integration
+											        CCIMailIntegration(); /***** CCIMail Integration ******/
 													waitFor(8).seconds();
-													accountMapping();  /**************  Account Mapping  *******************************************/
+													accountMapping();  /********  Account Mapping  **********/
 													
 													if (str.equals("Private Advertiser")){
-														privateAdvFinanceAccount.click();   /***** DEPENDENDT ON POSTCODE SUPPLIED*************/
+														privateAdvFinanceAccount.click();   /***** DEPENDENDT ON POSTCODE SUPPLIED*******/
 														waitFor(5).seconds();
 														String id = SOPID().getText();
 														while(id.equals(" ")) {
@@ -292,15 +281,12 @@ public class SalesforceGlueAccountPage  extends PageObject {
 																waitFor(5).seconds();
 																id = SOPID().getText();
 																synctimeforSOPID = synctimeforSOPID + 25;
-																/*System.out
-																		.println("Private Advertiser-->"+id);*/
 														}
 													} 
 													else 
 														{ 
 															financeAccount.click(); 
 														}	
-													
 													waitFor(5).seconds();
 													String id = SOPID().getText();
 													while(id.equals(" ")) {
@@ -313,13 +299,13 @@ public class SalesforceGlueAccountPage  extends PageObject {
 															synctimeforSOPID = synctimeforSOPID + 25;
 														}
 											 financeID = id;
-											System.out.print("***** " +j + ". " +"A/C Name : "+arraylist.get(i) + " +  A/C ID : " +CCIMailCustomerID().getText() + " +  SOPID : " +SOPID().getText() + " + ");
+											System.out.print("***** " +j + ". " +"Cusomer Account Name : "+arraylist.get(i) + " +  A/C ID : " +CCIMailCustomerID().getText() + " +  SOPID : " +SOPID().getText() + " + ");
 											getDriver().navigate().back();
 										}
 							waitFor(5).seconds();
 							createDirectOrder().click();
 									
-	/**************  Select Order Type *************************************************************/
+/**************  Select Order Type *************************************************************/
 					    	
 							if (str.equals("Direct Advertiser") || str.equals("Charity") || str.equals("Client") || str.equals("DMGT Group")) 
 					    	{
@@ -353,7 +339,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    		billingOption().selectByVisibleText("Direct");
 				    		billingSelectionNext().click(); 
 				    	}
-	/**************  Create Contact ******************************************************************/
+/**************  Create Contact ******************************************************************/
 						 	
 						 	waitFor(4).seconds();
 							conSalutation().selectByVisibleText(record.get("salutation"));
@@ -362,7 +348,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	emailAddress().type(record.get("email"));
 						   	conPhonenumebr().type(record.get("phone"));
 						   	
-	/**************  Associate Account*****************************************************************/				    	
+/**************  Associate Account*****************************************************************/				    	
 					    	
 						   	if (str.equals("Client") || str.equals("DMGT Group")) 
 						   	{
@@ -382,7 +368,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 							waitFor(1).seconds();
 							finish().click();
 							
-	/************** Launch OrderPlugin and Create Order*************************************************/
+/************** Launch OrderPlugin and Create Order*************************************************/
 							
 							 waitFor(20).seconds();
 					    	 getDriver().switchTo().frame(getDriver().findElement(By.tagName("iframe")));
@@ -396,7 +382,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 element.findElement(By.id("Order.SalesTerritory:order.primarySalesRep.id")).sendKeys("Tom Leader");
 					    	 waitFor(1).seconds();
 					    	 
-	/************************************ Package Details* **********************************************/
+/************************************ Package Details* **********************************************/
 					    	 element.findElement(By.xpath("//h4/a/span/input")).click();  	
 					    	 waitFor(5).seconds();
 					    	 element.findElement(By.xpath("//h4/a/span/input")).click(); 
@@ -423,14 +409,14 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 droplist.selectByVisibleText(record.get("module"));
 					    	 waitFor(5).seconds();
 					    	 
-	 /************************************ Price Details ***********************************************/
+/************************************ Price Details ***********************************************/
 					    	 element.findElement(By.xpath(".//*[@id='SchedulingAccordion']/div/div[3]/div[1]/h4/a/span")).click();
 					    	 waitFor(5).seconds();
 					    	 element.findElement(By.id("Order.Price:UserRevenue")).sendKeys(record.get("revenue"));
 					    	 waitFor(3).seconds();
 					    	 element.findElement(By.xpath("//fieldset/div/div[2]/div/div/span/button")).click(); 
 					    	 waitFor(3).seconds();
-	/************************************ Accept Order *************************************************/	 
+/************************************ Accept Order *************************************************/	 
 					    	 element.findElement(By.xpath("//nav[button='Accept']/button[3]")).click();
 					    	 if(str.equals("Private Advertiser") || str.equals("Direct Advertiser")|| str.equals("Brand")) {
 					    	 waitFor(3).seconds();
@@ -442,7 +428,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 waitFor(1).seconds();
 					    	 prepaymentwindow2.findElement(By.xpath("//input[@value='OK']")).click();
 					    	 }
-	/*************************************************************************************************/
+/*************************************************************************************************/
 					    	 try {
 						    	 WebDriverWait wait1 = new WebDriverWait(getDriver(), 5);
 						    	 if(wait1.until(ExpectedConditions.alertIsPresent())!=null)
@@ -451,7 +437,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 						    	 catch (Exception e) {}
 					    	 
 					    	 getDriver().switchTo().defaultContent();
-	/************************************************************************************************/						
+/************************************************************************************************/						
 					    	 						waitFor(15).seconds();
 					    	 				    	if (readAccountName().isVisible()) {
 					    	 				    		waitFor(1).minutes();
@@ -467,11 +453,11 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 				    		}catch (Exception e) { System.out
 																.print(" *** ORDER ID DIDN'T SYNC BACK TO GLUE WITH IN 60 SECONDS"); }
 					    	 				    		accountCreation();
-					    	 				    		System.out.println("\n*****     SYNC WAIT TIME FOR SOPID IS  : "+synctimeforSOPID + " SECONDS");
+					    	 				    		System.out.println("\n*****    SYNC WAIT TIME FOR SOPID TOOK  <= "+synctimeforSOPID + " SECONDS");
 					    	 				    		j++;
 					    	 				    		synctimeforSOPID =10;
 					    	 				    	}
-	/**********************************************************************************************/	
+/**********************************************************************************************/	
 				}
 				} catch (IOException e1) {
 					e1.printStackTrace();
