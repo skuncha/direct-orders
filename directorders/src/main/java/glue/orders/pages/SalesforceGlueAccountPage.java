@@ -34,7 +34,6 @@ public class SalesforceGlueAccountPage  extends PageObject {
 		int j=0;
 		int synctimeforSOPID = 5;
 		String financeID;
-//		long timeNow = System.currentTimeMillis();
 		ArrayList<String> arraylist = new ArrayList<String>(); 
 
 /***********************************************************************WEB ELEMENTS************************************************************************************/
@@ -125,7 +124,6 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	    public void newAccountButtonFromSearchResultsSection() {
 	    	waitFor(6).second();
 	    	newAccountButtonChild().click();
-	    	
 	    }
 	    
 	    public void accountMapping(){
@@ -232,7 +230,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 																synctimeforSOPID = synctimeforSOPID + 25;
 															}
 														financeID = id;
-														System.out.println("***** " +j + ". " + "A/C Name : "+arraylist.get(i) +  " +  SOPID : " +SOPID().getText() + " + ");
+														System.out.print("***** " +j + ". " + "A/C Name : "+arraylist.get(i) +  " +  SOPID : " +SOPID().getText() + " + ");
 														getDriver().navigate().back();
 														waitFor(8).seconds();
 														newRelationship.click(); 
@@ -315,7 +313,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 															synctimeforSOPID = synctimeforSOPID + 25;
 														}
 											 financeID = id;
-											System.out.println("***** " +j + ". " +"A/C Name : "+arraylist.get(i) + " +  A/C ID : " +CCIMailCustomerID().getText() + " +  SOPID : " +SOPID().getText() + " + ");
+											System.out.print("***** " +j + ". " +"A/C Name : "+arraylist.get(i) + " +  A/C ID : " +CCIMailCustomerID().getText() + " +  SOPID : " +SOPID().getText() + " + ");
 											getDriver().navigate().back();
 										}
 							waitFor(5).seconds();
@@ -467,11 +465,11 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 				    			System.out.print(" Order ID : " + orderID().getText());
 					    	 				    		}
 					    	 				    		}catch (Exception e) { System.out
-																.print(" *** ORDER ID DIDN'T SYNC BACK TO GLUE WITH IN 60 SECONDS \n "); }
+																.print(" *** ORDER ID DIDN'T SYNC BACK TO GLUE WITH IN 60 SECONDS"); }
 					    	 				    		accountCreation();
-					    	 				    		System.out.println("*****  SYNC WAIT TIME FOR SOPID IS     : "+synctimeforSOPID + " SECONDS");
+					    	 				    		System.out.println("\n *****  SYNC WAIT TIME FOR SOPID IS     : "+synctimeforSOPID + " SECONDS");
 					    	 				    		j++;
-					    	 				    		synctimeforSOPID =0;
+					    	 				    		synctimeforSOPID =10;
 					    	 				    	}
 	/**********************************************************************************************/	
 				}
