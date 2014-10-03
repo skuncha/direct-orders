@@ -109,11 +109,10 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	    	Select droplist = new Select(find(By.id("acc6")));   
 	    	droplist.selectByVisibleText(mytype);
 	    }
-	    
 	    public void newAccount() {
 	    	newButton().click();
 	    }
-	     
+//	     test
 	    public void newAccountChild(String keyword) {
 	    	
 	    	waitFor(8).second();
