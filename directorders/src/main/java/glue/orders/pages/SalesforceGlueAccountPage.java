@@ -112,7 +112,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	    public void newAccount() {
 	    	newButton().click();
 	    }
-//	     test
+
 	    public void newAccountChild(String keyword) {
 	    	
 	    	waitFor(8).second();
@@ -450,15 +450,15 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 				    			System.out.print(" Order ID : " + orderID().getText());
 					    	 				    		}
 					    	 				    		}catch (Exception e) { System.out
-																.print(" *** ORDER ID DIDN'T SYNC BACK TO GLUE WITH IN 60 SECONDS"); }
+																.print(" *** ORDER ID DIDN'T SYNC BACK TO GLUE WITHIN 60 SECONDS"); }
 					    	 				    		accountCreation();
-					    	 				    		System.out.println("\n*****    SYNC WAIT TIME FOR SOPID TOOK  <= "+synctimeforSOPID + " SECONDS");
+					    	 				    		System.out.println("\n*****    SYNC WAIT TIME FOR SOPID IS <= "+synctimeforSOPID + " SECONDS");
 					    	 				    		j++;
 					    	 				    		synctimeforSOPID =10;
 					    	 				    	}
 /**********************************************************************************************/	
 				}
-				} catch (IOException e1) {
+				} catch (IOException e1) { System.out.println("\n");
 					e1.printStackTrace();
 				}
 				waitABit(1000);
