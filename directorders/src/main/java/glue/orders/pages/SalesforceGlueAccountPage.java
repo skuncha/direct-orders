@@ -149,9 +149,9 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	    public void CCIMailIntegration(){
 	    	
 	    	CCICustomerMail().click();
-	    	waitFor(8).seconds();
+	    	waitFor(5).seconds();
 			getDriver().switchTo().alert().accept();  
-			waitFor(15).seconds();
+			waitFor(18).seconds();
 			getDriver().switchTo().alert().accept(); 
 			waitFor(8).seconds();
 	    }
