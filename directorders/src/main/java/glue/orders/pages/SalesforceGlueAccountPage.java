@@ -116,7 +116,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	    private WebElementFacade saveOrder()   	     { return element(By.xpath("//nav[button='Save']/button[2]"));										}
 	    private WebElementFacade selectModule()   	 { return element(By.id("Order.Schedule.Material:material.moduleCode"));							}
 	    private WebElementFacade selectPrice()   	 { return element(By.xpath(".//*[@id='SchedulingAccordion']/div/div[3]/div[1]/h4/a/span"));			}
-	    private WebElementFacade selectRevenue()   	 { return element(By.id("Order.Price:UserRevenue"));												}
+	    private WebElementFacade supplyRevenue()   	 { return element(By.id("Order.Price:UserRevenue"));												}
 	    private WebElementFacade updateRevenue()   	 { return element(By.xpath("//fieldset/div/div[2]/div/div/span/button"));							}
 	    private WebElementFacade acceptOrder()   	 { return element(By.xpath("//nav[button='Accept']/button[3]"));									} 
 
@@ -409,7 +409,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 /* selectSubSection().selectByVisibleText(record.get(record.get("subsection"))); // subsection
 					    	 waitFor(4).seconds();*/
 					    	 selectZone().selectByVisibleText(record.get("zones"));
-					    	 waitFor(5).seconds();
+					    	 waitFor(6).seconds();
 					    	 element.findElement(By.xpath("//tbody/tr[6]/td[3]")).click(); // date field
 					    	 waitFor(5).seconds();
 					    	 saveOrder().click();
@@ -420,7 +420,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 /************************************ Price Details ***********************************************/
 					    	 selectPrice().click();
 					    	 waitFor(5).seconds();
-					    	 selectRevenue().sendKeys(record.get("revenue"));
+					    	 supplyRevenue().sendKeys(record.get("revenue"));
 					    	 waitFor(2).seconds();
 					    	 updateRevenue().click();
 					    	 waitFor(2).seconds();
