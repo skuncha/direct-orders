@@ -399,11 +399,11 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 
 /************************************ Package Details* **********************************************/
 					    	 addPackage().click();
-							 waitFor(5).seconds();
+							 waitFor(6).seconds();
 							 addPackage().click();
-					    	 waitFor(5).seconds();
+					    	 waitFor(6).seconds();
 					    	 selectPublication().selectByVisibleText(record.get("publication"));
-					    	 waitFor(3).seconds();
+					    	 waitFor(4).seconds();
 					    	 selectSection().selectByVisibleText(record.get("section"));
 					    	 waitFor(4).seconds();
 					    	 /* selectSubSection().selectByVisibleText(record.get(record.get("subsection"))); // subsection
