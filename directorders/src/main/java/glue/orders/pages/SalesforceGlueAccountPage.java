@@ -70,7 +70,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 		private WebElementFacade conFirstName() 		{ return element(By.id("j_id0:j_id1:i:f:pb:d:FirstName.input"));			}
 		private WebElementFacade conLastName() 			{ return element(By.id("j_id0:j_id1:i:f:pb:d:LastName.input"));				}
 		private WebElementFacade conPhonenumebr() 		{ return element(By.id("j_id0:j_id1:i:f:pb:d:Phone.input"));				}
-		private WebElementFacade orderId() 				{ return element(By.xpath("//*[@id='salesforce-plugin']/article/aside[1]/div/div/pre"));	}
+//		private WebElementFacade orderId() 				{ return element(By.xpath("//*[@id='salesforce-plugin']/article/aside[1]/div/div/pre"));	}
 		
 		@FindBy(how = How.LINK_TEXT, using = "Accounts")
 		private WebElement accounts;
@@ -80,12 +80,11 @@ public class SalesforceGlueAccountPage  extends PageObject {
 		private WebElement saveButton;
 		@FindBy(how = How.PARTIAL_LINK_TEXT, using = "AM-")
 		private WebElement accountMapping;
-		private WebElementFacade customerRefAccountMapping()        { return element(By.xpath("//*[@id='00ND0000005WVcQ_ileinner']")); }
+//		private WebElementFacade customerRefAccountMapping()        { return element(By.xpath("//*[@id='00ND0000005WVcQ_ileinner']")); }
 		@FindBy(how = How.PARTIAL_LINK_TEXT, using = "-Mail Advertising")
 		private WebElement financeAccount;
 		@FindBy(how = How.PARTIAL_LINK_TEXT, using = "W8 5TT")
 		private WebElement privateAdvFinanceAccount;
-		private WebElementFacade FinanceAccNum()     { return element(By.xpath(".//*[@id='ep']/div[2]/div[2]/table/tbody/tr[3]/td[2]"));}
 		private WebElementFacade CCIMailCustomerID() { return element(By.xpath(".//*[@id='ep']/div[2]/div[2]/table/tbody/tr[5]/td[4]"));}
 		private WebElementFacade SOPID() 			 { return element(By.xpath(".//*[@id='ep']/div[2]/div[2]/table/tbody/tr[9]/td[2]"));}
 		@FindBy(how = How.XPATH, using = "//input[@title='New Relationship']")
@@ -103,6 +102,23 @@ public class SalesforceGlueAccountPage  extends PageObject {
 		private WebElementFacade orderID() 			 { return element(By.xpath("//*[@id='ep']/div[2]/div[2]/table/tbody/tr[10]/td[2]"));                 }
 	    @FindBy(xpath="//div/input")
 	    private WebElementFacade searchTerms;
+	    
+	    
+	    private WebElementFacade orderPurchaseNo()   { return element(By.id("Order.Identification:order.purchaseOrderNo"));								}
+	    private WebElementFacade orderNote()         { return element(By.id("Order.Identification:order.note"));					   					}
+	    private WebElementFacade orderUrgentNote()   { return element(By.id("Order.Identification:order.message"));										}
+	    private WebElementFacade orderSalesRepId()   { return element(By.id("Order.SalesTerritory:order.primarySalesRep.id"));							}
+	    private WebElementFacade addPackage()   	 { return element(By.xpath("//h4/a/span/input"));													}
+	    private WebElementFacade selectPublication() { return element(By.id("Order.Schedule:sched.publicationCode"));									}
+	    private WebElementFacade selectSection()     { return element(By.id("Order.Schedule:sched.sectionCode"));										}
+	    private WebElementFacade selectSubSection()  { return element(By.id("Order.Schedule:sched.subSectionCode"));									}
+	    private WebElementFacade selectZone()   	 { return element(By.id("Order.Schedule:"));														}
+	    private WebElementFacade saveOrder()   	     { return element(By.xpath("//nav[button='Save']/button[2]"));										}
+	    private WebElementFacade selectModule()   	 { return element(By.id("Order.Schedule.Material:material.moduleCode"));							}
+	    private WebElementFacade selectPrice()   	 { return element(By.xpath(".//*[@id='SchedulingAccordion']/div/div[3]/div[1]/h4/a/span"));			}
+	    private WebElementFacade selectRevenue()   	 { return element(By.id("Order.Price:UserRevenue"));												}
+	    private WebElementFacade updateRevenue()   	 { return element(By.xpath("//fieldset/div/div[2]/div/div/span/button"));							}
+	    private WebElementFacade acceptOrder()   	 { return element(By.xpath("//nav[button='Accept']/button[3]"));									} 
 
 /***********************************************************************WEB ELEMENTS************************************************************************************/
 		public void type(String mytype) {
@@ -357,7 +373,6 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	}
 							   	else 
 							   	{
-//							    	System.out.println("Customer Account Name is : -----------------> "+arraylist.get(i));
 							   		String endUseraccount = arraylist.get(i);
 									accountType().selectByVisibleText(endUseraccount);
 									waitFor(1).seconds();
@@ -375,48 +390,42 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					     	 waitFor(2).seconds();
 					     	 element.findElement(By.xpath("//td[div='DM Display']")).click();
 					     	 waitFor(5).seconds();
-					    	 element.findElement(By.id("Order.Identification:order.purchaseOrderNo")).sendKeys(record.get("PONumber"));
-					    	 element.findElement(By.id("Order.Identification:order.note")).sendKeys(record.get("orderNote"));
-					    	 element.findElement(By.id("Order.Identification:order.message")).sendKeys(record.get("urgentNote"));
-					    	 element.findElement(By.id("Order.SalesTerritory:order.primarySalesRep.id")).sendKeys("Tom Leader");
+					     	 
+					     	 orderPurchaseNo().sendKeys(record.get("PONumber"));
+							 orderNote().sendKeys(record.get("orderNote"));
+							 orderUrgentNote().sendKeys(record.get("urgentNote"));
+							 orderSalesRepId().sendKeys("Tom Leader");
 					    	 waitFor(1).seconds();
 					    	 
 /************************************ Package Details* **********************************************/
-					    	 element.findElement(By.xpath("//h4/a/span/input")).click();  	
+					    	 addPackage().click();
+							 waitFor(5).seconds();
+							 addPackage().click();
 					    	 waitFor(5).seconds();
-					    	 element.findElement(By.xpath("//h4/a/span/input")).click(); 
-					    	 waitFor(5).seconds();
-					    	 Select droplist = new Select(element.findElement(By.id("Order.Schedule:sched.publicationCode")));
-					    	 droplist.selectByVisibleText(record.get("publication"));
+					    	 selectPublication().selectByVisibleText(record.get("publication"));
 					    	 waitFor(3).seconds();
-					    	 droplist = new Select(element.findElement(By.id("Order.Schedule:sched.sectionCode")));
-					    	 droplist.selectByVisibleText(record.get("section"));
+					    	 selectSection().selectByVisibleText(record.get("section"));
 					    	 waitFor(4).seconds();
-					    	 /*droplist = new Select(element.findElement(By.id("Order.Schedule:sched.subSectionCode")));
-					    	 droplist.selectByVisibleText(record.get(record.get("subsection"))); // subsection
+					    	 /* selectSubSection().selectByVisibleText(record.get(record.get("subsection"))); // subsection
 					    	 waitFor(4).seconds();*/
-					    	 droplist = new Select(element.findElement(By.id("Order.Schedule:")));
-					    	 droplist.selectByVisibleText(record.get("zones"));
+					    	 selectZone().selectByVisibleText(record.get("zones"));
 					    	 waitFor(5).seconds();
 					    	 element.findElement(By.xpath("//tbody/tr[6]/td[3]")).click(); // date field
 					    	 waitFor(5).seconds();
-					    	 element.findElement(By.xpath("//nav[button='Save']/button[2]")).click();
-	/*				    	 String orid = (String) element.findElement(By.xpath("//*[@id='salesforce-plugin']/article/aside[1]/div/div/pre")).getText();
-					    	 System.out.println("Order id is   --->"+orid);*/
+					    	 saveOrder().click();
 					    	 waitFor(12).seconds();
-					    	 droplist = new Select(element.findElement(By.id("Order.Schedule.Material:material.moduleCode")));
-					    	 droplist.selectByVisibleText(record.get("module"));
+					    	 selectModule().selectByVisibleText(record.get("module"));
 					    	 waitFor(5).seconds();
 					    	 
 /************************************ Price Details ***********************************************/
-					    	 element.findElement(By.xpath(".//*[@id='SchedulingAccordion']/div/div[3]/div[1]/h4/a/span")).click();
+					    	 selectPrice().click();
 					    	 waitFor(5).seconds();
-					    	 element.findElement(By.id("Order.Price:UserRevenue")).sendKeys(record.get("revenue"));
-					    	 waitFor(3).seconds();
-					    	 element.findElement(By.xpath("//fieldset/div/div[2]/div/div/span/button")).click(); 
-					    	 waitFor(3).seconds();
+					    	 selectRevenue().sendKeys(record.get("revenue"));
+					    	 waitFor(2).seconds();
+					    	 updateRevenue().click();
+					    	 waitFor(2).seconds();
 /************************************ Accept Order *************************************************/	 
-					    	 element.findElement(By.xpath("//nav[button='Accept']/button[3]")).click();
+					    	 acceptOrder().click();
 					    	 if(str.equals("Private Advertiser") || str.equals("Direct Advertiser")|| str.equals("Brand")) {
 					    	 waitFor(3).seconds();
 					    	 WebElement prepaymentwindow1 = getDriver().switchTo().activeElement();
