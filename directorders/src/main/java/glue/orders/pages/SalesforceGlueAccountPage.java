@@ -340,7 +340,6 @@ public class SalesforceGlueAccountPage  extends PageObject {
 									    				 synctimeforSOPID = synctimeforSOPID + 30;
 									    			 }
 									    		} catch (Exception e) {}
-									    		
 								    	}
 								    	else {
 								    		
