@@ -381,7 +381,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 							waitFor(1).seconds();
 							finish().click();
 							
-/************** Launch OrderPlugin and Create Order*************************************************/
+/******************************** Launch OrderPlugin and Create Order********************************/
 							
 							 waitFor(20).seconds();
 					    	 getDriver().switchTo().frame(getDriver().findElement(By.tagName("iframe")));
@@ -389,7 +389,6 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					     	 waitFor(2).seconds();
 					     	 element.findElement(By.xpath("//td[div='DM Display']")).click();
 					     	 waitFor(5).seconds();
-					     	 
 					     	 orderPurchaseNo().sendKeys(record.get("PONumber"));
 							 orderNote().sendKeys(record.get("orderNote"));
 							 orderUrgentNote().sendKeys(record.get("urgentNote"));
@@ -408,7 +407,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 /* selectSubSection().selectByVisibleText(record.get(record.get("subsection"))); // subsection
 					    	 waitFor(4).seconds();*/
 					    	 selectZone().selectByVisibleText(record.get("zones"));
-					    	 waitFor(6).seconds();
+					    	 waitFor(8).seconds();
 					    	 element.findElement(By.xpath("//tbody/tr[6]/td[3]")).click(); // date field
 					    	 waitFor(5).seconds();
 					    	 saveOrder().click();
@@ -418,7 +417,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 
 /************************************ Price Details ***********************************************/
 					    	 selectPrice().click();
-					    	 waitFor(5).seconds();
+					    	 waitFor(3).seconds();
 					    	 supplyRevenue().sendKeys(record.get("revenue"));
 					    	 waitFor(2).seconds();
 					    	 updateRevenue().click();
@@ -442,7 +441,6 @@ public class SalesforceGlueAccountPage  extends PageObject {
 						    	      getDriver().switchTo().alert().accept();
 						    	 }
 						    	 catch (Exception e) {}
-					    	 
 					    	 getDriver().switchTo().defaultContent();
 /************************************************************************************************/						
 					    	 						waitFor(15).seconds();
