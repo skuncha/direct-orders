@@ -415,6 +415,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 waitFor(12).seconds();
 					    	 selectModule().selectByVisibleText(record.get("module"));
 					    	 waitFor(5).seconds();
+					    	 
 					    	 Thucydides.takeScreenshot();
 /************************************ Price Details ***********************************************/
 					    	 selectPrice().click();
