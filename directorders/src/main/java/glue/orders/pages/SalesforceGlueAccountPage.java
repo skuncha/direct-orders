@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Map;
 
+import net.thucydides.core.Thucydides;
 import net.thucydides.core.csv.CSVTestDataSource;
 import net.thucydides.core.pages.PageObject;
 import net.thucydides.core.pages.WebElementFacade;
@@ -414,7 +415,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 waitFor(12).seconds();
 					    	 selectModule().selectByVisibleText(record.get("module"));
 					    	 waitFor(5).seconds();
-					    	 
+					    	 Thucydides.takeScreenshot();
 /************************************ Price Details ***********************************************/
 					    	 selectPrice().click();
 					    	 waitFor(3).seconds();
