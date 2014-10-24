@@ -23,6 +23,6 @@ When Mail user provides input data from CSV [file] and create account
 
 Examples:
 |username													|password	|searchAccountName 	|file											|
-|srinivasa.kuncha@mailnewspapers.co.uk.prodmirror			|glue1234	|xyz123				|src\main\resources\createOrders.csv			|
+|srinivasa.kuncha@dmgmedia.co.uk.systest					|best1234	|xyz123				|src\main\resources\createOrders.csv			|
 
 
