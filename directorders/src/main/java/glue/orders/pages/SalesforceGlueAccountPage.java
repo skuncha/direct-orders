@@ -100,10 +100,9 @@ public class SalesforceGlueAccountPage  extends PageObject {
 		private WebElementFacade syncNext() 		 { return element(By.id("j_id0:j_id1:i:f:pb:pbb:bottom:next"));				                         }
 		private WebElementFacade searchGlue() 		 { return element(By.id("phSearchButton"));				                         	 				 }
 		private WebElementFacade orderlink() 		 { return element(By.xpath("//*[@id='Order_body']/table/tbody/tr[2]/th/a"));						 }
-		private WebElementFacade orderID() 			 { return element(By.xpath("//*[@id='ep']/div[2]/div[2]/table/tbody/tr[10]/td[2]"));                 }
+		private WebElementFacade orderID() 			 { return element(By.xpath("//*[@id='ep']/div[2]/div[2]/table/tbody/tr[6]/td[2]"));                 }
 	    @FindBy(xpath="//div/input")
 	    private WebElementFacade searchTerms;
-	    
 	    
 	    private WebElementFacade orderPurchaseNo()   { return element(By.id("Order.Identification:order.purchaseOrderNo"));								}
 	    private WebElementFacade orderNote()         { return element(By.id("Order.Identification:order.note"));					   					}
