@@ -14,7 +14,7 @@ import org.openqa.selenium.By;
 	private WebElementFacade loginbutton() { return element(By.id("Login"));}
 	
     public void supplyLogin_Credientials(String username, String password) {
-    	
+    	waitABit(2000);
     	username().type(username);
     	password().type(password);
     	

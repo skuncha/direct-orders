@@ -2,10 +2,7 @@ package glue.orders.pages;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Map;
 
 import net.thucydides.core.Thucydides;
@@ -383,7 +380,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 							
 /******************************** Launch OrderPlugin and Create Order********************************/
 							
-							 waitFor(20).seconds();
+							 waitFor(25).seconds();
 					    	 getDriver().switchTo().frame(getDriver().findElement(By.tagName("iframe")));
 					     	 WebElement element = getDriver().switchTo().activeElement();
 					     	 waitFor(2).seconds();
