@@ -211,6 +211,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 									String Name = readAccountName().getText();
 							    	arraylist.add(Name);
 							    	waitFor(6).seconds();
+							    	Thucydides.takeScreenshot();
 	/**************************************************************************/ 
 										    	if (str.equals("Client") || str.equals("DMGT Group")) 
 										    	{
@@ -274,6 +275,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 							    	String Name = readAccountName().getText();
 							    	arraylist.add(Name);
 							    	waitFor(6).seconds();
+							    	Thucydides.takeScreenshot();
 							    	}
 										if (str.equals("Direct Advertiser") || str.equals("Charity") || str.equals("Brand")|| str.equals("Private Advertiser")){
 													
@@ -380,7 +382,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 							
 /******************************** Launch OrderPlugin and Create Order********************************/
 							
-							 waitFor(25).seconds();
+							 waitFor(20).seconds();
 					    	 getDriver().switchTo().frame(getDriver().findElement(By.tagName("iframe")));
 					     	 WebElement element = getDriver().switchTo().activeElement();
 					     	 waitFor(2).seconds();
@@ -391,7 +393,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 							 orderUrgentNote().sendKeys(record.get("urgentNote"));
 							 orderSalesRepId().sendKeys("Tom Leader");
 					    	 waitFor(1).seconds();
-					    	 
+					    	 Thucydides.takeScreenshot();
 /************************************ Package Details* **********************************************/
 					    	 addPackage().click();
 							 waitFor(6).seconds();
@@ -404,14 +406,13 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 /* selectSubSection().selectByVisibleText(record.get(record.get("subsection"))); // subsection
 					    	 waitFor(4).seconds();*/
 					    	 selectZone().selectByVisibleText(record.get("zones"));
-					    	 waitFor(8).seconds();
+					    	 waitFor(5).seconds();
 					    	 element.findElement(By.xpath("//tbody/tr[6]/td[3]")).click(); // date field
 					    	 waitFor(5).seconds();
-					    	 saveOrder().click();
-					    	 waitFor(12).seconds();
+					    	 /*saveOrder().click();
+					    	 waitFor(12).seconds();*/
 					    	 selectModule().selectByVisibleText(record.get("module"));
 					    	 waitFor(5).seconds();
-					    	 
 					    	 Thucydides.takeScreenshot();
 /************************************ Price Details ***********************************************/
 					    	 selectPrice().click();
@@ -420,7 +421,8 @@ public class SalesforceGlueAccountPage  extends PageObject {
 					    	 waitFor(2).seconds();
 					    	 updateRevenue().click();
 					    	 waitFor(2).seconds();
-/************************************ Accept Order *************************************************/	 
+/************************************ Accept Order *************************************************/	
+					    	 Thucydides.takeScreenshot();
 					    	 acceptOrder().click();
 					    	 if(str.equals("Private Advertiser") || str.equals("Direct Advertiser")|| str.equals("Brand")) {
 					    	 waitFor(3).seconds();
